@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "first",
+      "prefix": "my-first-project",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
