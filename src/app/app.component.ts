@@ -6,5 +6,10 @@ import { Component } from '@angular/core'
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'Angular-FirstProject'
+    appTitle = 'My First Project'
+    text = '123'
+
+    changeTextHandler(event: Event) {
+        this.text = (event.currentTarget as HTMLInputElement).value
+    }
 }
