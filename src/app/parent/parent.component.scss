@@ -1,0 +1,16 @@
+.default {
+    width: 270px;
+    padding: 5px;
+    text-align: center;
+}
+
+.success {
+    background-color: green;
+    color: blue;
+}
+
+.error {
+    color: red;
+    border: 1px solid red;
+    padding: 5px;
+}

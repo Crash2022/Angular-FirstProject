@@ -18,12 +18,16 @@ interface Grades {
 })
 export class ParentComponent {
     switchValue = ''
-    isLoading = true
+    isLoading = false
+    isClass = false
 
     constructor() {
+        // setTimeout(() => {
+        //     this.isLoading = false
+        // }, 3000)
         setTimeout(() => {
-            this.isLoading = false
-        }, 3000)
+            this.isClass = true
+        }, 2000)
     }
 
     grades: string[] = ['js: 4', 'react: 5']
