@@ -25,9 +25,9 @@ export class ParentComponent {
         // setTimeout(() => {
         //     this.isLoading = false
         // }, 3000)
-        setTimeout(() => {
-            this.isClass = true
-        }, 2000)
+        // setTimeout(() => {
+        //     this.isClass = true
+        // }, 2000)
     }
 
     grades: string[] = ['js: 4', 'react: 5']
