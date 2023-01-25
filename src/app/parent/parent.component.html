@@ -31,4 +31,26 @@
         <h1 [ngClass]="{ default: true, error: isClass }">Test Style Classes</h1>
         <h1 [ngStyle]="{ fontSize: '40px' }">Test InlineStyle</h1>
     </div>
+    <hr />
+    <h2>09.8 - 01</h2>
+    <div *ngFor="let fr of fruits">{{ fr.name }} - {{ fr.price }}</div>
+    <h2>09.8 - 02-03</h2>
+    <div
+        *ngFor="let fr of fruits; index as i; even as even; odd as odd"
+        [ngClass]="{ fruits: true, even: even, odd: odd }"
+    >
+        {{ fr.name }} - {{ fr.price }}
+    </div>
+    <h2>09.8 - 04</h2>
+    <div>
+        <div *ngFor="let fr of fruits">
+            <div *ngIf="fr.price > 25">{{ fr.name }} - {{ fr.price }}</div>
+        </div>
+    </div>
+    <h2>09.8 - 05</h2>
+    <div>
+        <div *ngFor="let fr of fruits">
+            <div [ngClass]="{ bonus: fr.price > 30 }">{{ fr.name }} - {{ fr.price }}</div>
+        </div>
+    </div>
 </div>

@@ -11,6 +11,12 @@ interface Grades {
     mark: number
 }
 
+interface Fruits {
+    id: number
+    name: string
+    price: number
+}
+
 @Component({
     selector: 'first-parent',
     templateUrl: './parent.component.html',
@@ -29,6 +35,18 @@ export class ParentComponent {
         //     this.isClass = true
         // }, 2000)
     }
+
+    fruits: Fruits[] = [
+        { id: 1, name: 'apple', price: 10 },
+        { id: 2, name: 'mango', price: 100 },
+        { id: 3, name: 'strawberry', price: 30 },
+        { id: 4, name: 'banana', price: 20 },
+        { id: 5, name: 'pineapple', price: 40 },
+        { id: 6, name: 'dragon fruit', price: 50 },
+        { id: 7, name: 'pearl', price: 25 },
+        { id: 8, name: 'lemon', price: 15 },
+        { id: 9, name: 'kiwi', price: 60 },
+    ]
 
     grades: string[] = ['js: 4', 'react: 5']
     lessons: Lessons[] = [
