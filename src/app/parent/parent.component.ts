@@ -17,6 +17,7 @@ interface Grades {
     styleUrls: ['./parent.component.scss'],
 })
 export class ParentComponent {
+    switchValue = ''
     isLoading = true
 
     constructor() {

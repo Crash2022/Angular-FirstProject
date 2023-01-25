@@ -15,4 +15,13 @@
             </div>
         </div>
     </ng-template>
+
+    <hr />
+    <input type="text" [(ngModel)]="switchValue" />
+    <div [ngSwitch]="switchValue">
+        <div *ngSwitchCase="1">One</div>
+        <div *ngSwitchCase="2">Two</div>
+        <div *ngSwitchCase="3">Three</div>
+        <div *ngSwitchDefault>NO!</div>
+    </div>
 </div>
