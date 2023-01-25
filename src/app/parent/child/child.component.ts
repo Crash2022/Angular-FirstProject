@@ -1,10 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { Address, Hobbies } from '../parent.component'
-
-export interface Subjects {
-    math: number
-    react: number
-}
+import { Component, EventEmitter, Output } from '@angular/core'
 
 @Component({
     selector: 'first-child',
@@ -12,18 +6,11 @@ export interface Subjects {
     styleUrls: ['./child.component.scss'],
 })
 export class ChildComponent {
-    @Output() sendMarkEvent = new EventEmitter<Subjects>()
+    @Output() SendInputEvent = new EventEmitter<string>()
 
-    @Input() surnameProps?: string
-    @Input() address?: Address
-    @Input() hobbies?: Hobbies
-    name = 'Alexander'
+    inputGrade = ''
 
-    sendMark() {
-        const subjects: Subjects = {
-            math: 4,
-            react: 5,
-        }
-        this.sendMarkEvent.emit(subjects)
+    sendInputTextHandler() {
+        this.SendInputEvent.emit(this.inputGrade)
     }
 }

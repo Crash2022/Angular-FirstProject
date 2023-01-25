@@ -1,13 +1,5 @@
 <h1>parent works!</h1>
-<div>{{ surname }} {{ name }} from {{ address.city }}, {{ address.house }}</div>
 <div>
-    <first-child
-        [surnameProps]="surname"
-        [address]="address"
-        [hobbies]="hobbies"
-        (sendMarkEvent)="getMarks($event)"
-    ></first-child>
-    <div>
-        {{ react }}
-    </div>
+    <first-child (SendInputEvent)="getGrade($event)"></first-child>
+    <div>{{ grades | json }}</div>
 </div>

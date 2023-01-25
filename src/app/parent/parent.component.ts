@@ -1,14 +1,4 @@
 import { Component } from '@angular/core'
-import { Subjects } from './child/child.component'
-
-export interface Address {
-    city: string
-    house: number
-}
-export interface Hobbies {
-    first: string
-    second: string
-}
 
 @Component({
     selector: 'first-parent',
@@ -16,19 +6,9 @@ export interface Hobbies {
     styleUrls: ['./parent.component.scss'],
 })
 export class ParentComponent {
-    react?: number
-    name = 'Evgeniy'
-    surname = 'Chashin'
-    address: Address = {
-        city: 'Orenburg',
-        house: 666,
-    }
-    hobbies: Hobbies = {
-        first: 'photo',
-        second: 'bikes',
-    }
+    grades: string[] = ['js: 4', 'react: 5']
 
-    getMarks(value: Subjects) {
-        this.react = value.react
+    getGrade(grade: string) {
+        this.grades.push(grade)
     }
 }
