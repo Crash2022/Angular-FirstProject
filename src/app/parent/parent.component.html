@@ -1,5 +1,9 @@
 <h1>parent works!</h1>
 <div>
     <first-child (SendInputEvent)="getGrade($event)"></first-child>
-    <div *ngFor="let el of grades; index as i">{{ i + 1 }}.{{ el }}</div>
+    <!--    <div *ngFor="let el of grades; index as i">{{ i + 1 }}.{{ el }}</div>-->
+    <div *ngFor="let item of lessons">
+        <h3>{{ item.title }}</h3>
+        <div *ngFor="let el of item.grades">{{ el.mark }}</div>
+    </div>
 </div>
