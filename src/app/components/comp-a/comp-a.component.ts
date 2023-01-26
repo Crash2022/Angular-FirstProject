@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ValueService } from '../services/value.service'
 import { Observable } from 'rxjs'
+import { BeautyLoggerService } from '../services/beauty-logger.service'
 
 @Component({
     selector: 'first-comp-a',
@@ -10,7 +11,10 @@ import { Observable } from 'rxjs'
 export class CompAComponent implements OnInit {
     value$ = new Observable()
 
-    constructor(private valueService: ValueService) {}
+    constructor(
+        private valueService: ValueService,
+        private beautyLoggerService: BeautyLoggerService
+    ) {}
 
     ngOnInit(): void {
         // this.value = this.valueService.value
@@ -25,4 +29,12 @@ export class CompAComponent implements OnInit {
     // decrementValue() {
     //     this.valueService.decrement()
     // }
+    addValue() {
+        // console.log('value was added')
+        // console.log('%cCode working', 'background: red; color: yellow; font-size: x-large')
+        this.beautyLoggerService.logger('addError', 'error')
+        this.beautyLoggerService.logger('addSuccess', 'success')
+        this.beautyLoggerService.logger('addInfo', 'info')
+        this.beautyLoggerService.logger('addWarning', 'warning')
+    }
 }
