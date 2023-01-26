@@ -8,12 +8,34 @@ interface Todolists {
     title: string
 }
 
+interface CreateTodoResponse {
+    data: {
+        item: Todolists
+    }
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
+interface DeleteTodoResponse {
+    data: {}
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
 @Component({
     selector: 'first-todos',
     templateUrl: './todos.component.html',
     styleUrls: ['./todos.component.scss'],
 })
 export class TodosComponent implements OnInit {
+    httpOptions = {
+        withCredentials: true,
+        headers: {
+            'api-key': '74a19bbb-094d-4af5-81dc-fc82431ac8a3',
+        },
+    }
     todos: Todolists[] = []
 
     constructor(private http: HttpClient) {}
@@ -22,15 +44,39 @@ export class TodosComponent implements OnInit {
     }
     getTodos() {
         this.http
-            .get<Todolists[]>('https://social-network.samuraijs.com/api/1.1/todo-lists', {
-                withCredentials: true,
-                headers: {
-                    'api-key': '74a19bbb-094d-4af5-81dc-fc82431ac8a3',
-                },
-            })
+            .get<Todolists[]>(
+                'https://social-network.samuraijs.com/api/1.1/todo-lists',
+                this.httpOptions
+            )
             .subscribe((res: Todolists[]) => {
                 // console.log(res)
                 this.todos = res
+            })
+    }
+    createTodo() {
+        const randomNumber = Math.floor(Math.random() * 100)
+        const title = 'Angular' + randomNumber
+        this.http
+            .post<CreateTodoResponse>(
+                'https://social-network.samuraijs.com/api/1.1/todo-lists',
+                { title },
+                this.httpOptions
+            )
+            .subscribe(res => {
+                // console.log(res)
+                this.todos.unshift(res.data.item)
+            })
+    }
+    deleteTodo() {
+        const todolistId = '982ebd69-4605-4c99-9e0d-4fcd01fc5ec2'
+        this.http
+            .delete<DeleteTodoResponse>(
+                `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
+                this.httpOptions
+            )
+            .subscribe(() => {
+                // console.log(res)
+                this.todos = this.todos.filter(tl => tl.id !== todolistId)
             })
     }
 }

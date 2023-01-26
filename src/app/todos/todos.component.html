@@ -1,4 +1,8 @@
 <div>
     <p>todos works!</p>
 </div>
+<div>
+    <button (click)="createTodo()">Create New Todo</button>
+    <button (click)="deleteTodo()">Delete Todo</button>
+</div>
 <div *ngFor="let todo of todos">{{ todo.addedDate }}-{{ todo.title }}</div>
