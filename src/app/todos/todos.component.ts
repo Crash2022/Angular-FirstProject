@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { BaseTodoResponse, Todolists, TodosService } from '../services/todos.service'
+import { Todolists, TodosService } from '../services/todos.service'
 
 @Component({
     selector: 'first-todos',
@@ -26,7 +26,7 @@ export class TodosComponent implements OnInit {
         })
     }
     deleteTodo() {
-        const todolistId = '982ebd69-4605-4c99-9e0d-4fcd01fc5ec2'
+        const todolistId = '92d8b81f-f12c-4b3e-ac86-ba92d79338da'
         this.todosService.deleteTodo(todolistId).subscribe(() => {
             this.todos = this.todos.filter(tl => tl.id !== todolistId)
         })
