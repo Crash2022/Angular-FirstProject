@@ -8,17 +8,8 @@ interface Todolists {
     title: string
 }
 
-interface CreateTodoResponse {
-    data: {
-        item: Todolists
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
-
-interface DeleteTodoResponse {
-    data: {}
+interface BaseTodoResponse<T> {
+    data: T
     messages: string[]
     fieldsErrors: string[]
     resultCode: number
@@ -57,7 +48,7 @@ export class TodosComponent implements OnInit {
         const randomNumber = Math.floor(Math.random() * 100)
         const title = 'Angular' + randomNumber
         this.http
-            .post<CreateTodoResponse>(
+            .post<BaseTodoResponse<{ item: Todolists }>>(
                 'https://social-network.samuraijs.com/api/1.1/todo-lists',
                 { title },
                 this.httpOptions
@@ -70,7 +61,7 @@ export class TodosComponent implements OnInit {
     deleteTodo() {
         const todolistId = '982ebd69-4605-4c99-9e0d-4fcd01fc5ec2'
         this.http
-            .delete<DeleteTodoResponse>(
+            .delete<BaseTodoResponse<{}>>(
                 `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
                 this.httpOptions
             )
