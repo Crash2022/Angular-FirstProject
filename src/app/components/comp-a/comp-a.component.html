@@ -1,3 +1,5 @@
 <hr />
 <p>comp-a works!</p>
-<div>{{ test }}</div>
+<button (click)="incrementValue()">Increment</button>
+<!--<button (click)="decrementValue()">Decrement</button>-->
+<div [ngStyle]="{ fontWeight: 'bold', fontSize: '30px' }">{{ value }}</div>
