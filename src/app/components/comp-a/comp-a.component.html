@@ -2,4 +2,4 @@
 <p>comp-a works!</p>
 <button (click)="incrementValue()">Increment</button>
 <!--<button (click)="decrementValue()">Decrement</button>-->
-<div [ngStyle]="{ fontWeight: 'bold', fontSize: '30px' }">{{ value }}</div>
+<div [ngStyle]="{ fontWeight: 'bold', fontSize: '30px' }">{{ value$ | async }}</div>

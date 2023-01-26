@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ValueService } from '../services/value.service'
+import { Observable } from 'rxjs'
 
 @Component({
     selector: 'first-comp-b',
@@ -7,21 +8,26 @@ import { ValueService } from '../services/value.service'
     styleUrls: ['./comp-b.component.scss'],
 })
 export class CompBComponent implements OnInit {
-    value = 0
+    newValue$ = new Observable()
 
     constructor(private valueService: ValueService) {}
 
     ngOnInit(): void {
         // this.value = this.valueService.value
-        this.valueService.value$.subscribe(value => {
-            this.value = value
-        })
+        // правильный способ
+        // this.valueService.value$.subscribe(value => {
+        //     this.value = value
+        // })
+        this.newValue$ = this.valueService.newValue$
     }
 
     // incrementValue() {
     //     this.valueService.increment()
     // }
+    // decrementValue() {
+    //     this.valueService.decrement()
+    // }
     decrementValue() {
-        this.valueService.decrement()
+        this.valueService.decrementNew()
     }
 }
