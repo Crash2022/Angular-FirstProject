@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, map, Observable } from 'rxjs'
 import { environment } from '../../environments/environments'
 
 export interface Todolists {
@@ -29,29 +29,90 @@ export class TodosService {
         },
     }
 
+    // создаем начальное значение
+    todos$: BehaviorSubject<Todolists[]> = new BehaviorSubject<Todolists[]>([])
+
     constructor(private http: HttpClient) {}
 
-    getTodos(): Observable<Todolists[]> {
-        return this.http.get<Todolists[]>(`${environment.baseUrl}/todo-lists`, this.httpOptions)
+    getTodos() {
+        this.http
+            .get<Todolists[]>(`${environment.baseUrl}/todo-lists`, this.httpOptions)
+            .subscribe(todos => {
+                this.todos$.next(todos)
+            })
     }
-    createTodo(title: string): Observable<BaseTodoResponse<{ item: Todolists }>> {
+    /*getTodos(): Observable<Todolists[]> {
+        return this.http.get<Todolists[]>(`${environment.baseUrl}/todo-lists`, this.httpOptions)
+    }*/
+    createTodo(title: string) {
+        this.http
+            .post<BaseTodoResponse<{ item: Todolists }>>(
+                `${environment.baseUrl}/todo-lists`,
+                { title },
+                this.httpOptions
+            )
+            .pipe(
+                map(res => {
+                    const newTodo = res.data.item
+                    const stateTodos = this.todos$.getValue()
+                    return [newTodo, ...stateTodos]
+                })
+            )
+            .subscribe(todos => {
+                this.todos$.next(todos)
+            })
+    }
+    /*createTodo(title: string): Observable<BaseTodoResponse<{ item: Todolists }>> {
         return this.http.post<BaseTodoResponse<{ item: Todolists }>>(
             `${environment.baseUrl}/todo-lists`,
             { title },
             this.httpOptions
         )
+    }*/
+    deleteTodo(todolistId: string) {
+        this.http
+            .delete<BaseTodoResponse>(
+                `${environment.baseUrl}/todo-lists/${todolistId}`,
+                this.httpOptions
+            )
+            .pipe(
+                map(() => {
+                    return this.todos$.getValue().filter(tl => tl.id !== todolistId)
+                })
+            )
+            .subscribe(todo => {
+                this.todos$.next(todo)
+            })
     }
-    deleteTodo(todolistId: string): Observable<BaseTodoResponse> {
+    /*deleteTodo(todolistId: string): Observable<BaseTodoResponse> {
         return this.http.delete<BaseTodoResponse>(
             `${environment.baseUrl}/todo-lists/${todolistId}`,
             this.httpOptions
         )
+    }*/
+    updateTodo(todolistId: string, newTitle: string) {
+        this.http
+            .put<BaseTodoResponse>(
+                `${environment.baseUrl}/todo-lists/${todolistId}`,
+                { title: newTitle },
+                this.httpOptions
+            )
+            .pipe(
+                map(() => {
+                    return this.todos$
+                        .getValue()
+                        .map(tl => (tl.id === todolistId ? { ...tl, title: newTitle } : tl))
+                })
+            )
+            .subscribe(todo => {
+                this.todos$.next(todo)
+            })
     }
-    updateTodo(todolistId: string, newTitle: string): Observable<BaseTodoResponse> {
+    /*updateTodo(todolistId: string, newTitle: string): Observable<BaseTodoResponse> {
         return this.http.put<BaseTodoResponse>(
             `${environment.baseUrl}/todo-lists/${todolistId}`,
             { title: newTitle },
             this.httpOptions
         )
-    }
+    }*/
 }
