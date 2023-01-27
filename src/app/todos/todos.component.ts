@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Todolists, TodosService } from '../services/todos.service'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
     selector: 'first-todos',
@@ -8,14 +9,26 @@ import { Todolists, TodosService } from '../services/todos.service'
 })
 export class TodosComponent implements OnInit {
     todos: Todolists[] = []
+    error = ''
 
     constructor(private todosService: TodosService) {}
     ngOnInit(): void {
         this.getTodos()
     }
     getTodos() {
-        this.todosService.getTodos().subscribe((res: Todolists[]) => {
+        // синтаксис для случая без обработки ошибки
+        /* this.todosService.getTodos().subscribe((res: Todolists[]) => {
             this.todos = res
+        })*/
+        // синтаксис для случая с обработкой ошибки
+        this.todosService.getTodos().subscribe({
+            next: (res: Todolists[]) => {
+                this.todos = res
+            },
+            error: (error: HttpErrorResponse) => {
+                // console.log(error.message)
+                this.error = error.message
+            },
         })
     }
     createTodo() {

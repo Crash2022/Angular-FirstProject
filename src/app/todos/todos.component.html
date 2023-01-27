@@ -6,5 +6,9 @@
     <button (click)="deleteTodo()">Delete Todo</button>
     <button (click)="updateTodo()">Update Todo Title</button>
 </div>
-
-<div *ngFor="let todo of todos">{{ todo.addedDate }}-{{ todo.title }}</div>
+<div>
+    <h1 *ngIf="error; else elseNotError">{{ error }}</h1>
+</div>
+<ng-template #elseNotError>
+    <div *ngFor="let todo of todos">{{ todo.addedDate }}-{{ todo.title }}</div>
+</ng-template>
