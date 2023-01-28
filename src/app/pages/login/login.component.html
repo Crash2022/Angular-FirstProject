@@ -5,7 +5,8 @@
         <input id="email" type="text" formControlName="email" required />
     </div>
     <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="error">
-        Field is required
+        <div *ngIf="email!.errors?.['required']">E-mail is required</div>
+        <div *ngIf="email!.errors?.['email']">Please enter correct e-mail</div>
     </div>
 
     <div>
