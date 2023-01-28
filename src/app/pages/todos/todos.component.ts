@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Todolists, TodosService } from '../services/todos.service'
+import { Todolists, TodosService } from './services/todos.service'
 import { HttpErrorResponse } from '@angular/common/http'
 import { Observable, Subscription } from 'rxjs'
 

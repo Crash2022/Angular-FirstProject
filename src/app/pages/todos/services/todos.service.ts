@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { BehaviorSubject, catchError, EMPTY, map, Observable, throwError } from 'rxjs'
-import { environment } from '../../environments/environments'
-import { BeautyLoggerService } from '../components/services/beauty-logger.service'
+import { environment } from '../../../../environments/environments'
+import { BeautyLoggerService } from '../../../services/beauty-logger.service'
 
 export interface Todolists {
     addedDate: string
