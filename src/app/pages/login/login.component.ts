@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
     selector: 'first-login',
@@ -8,8 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms'
 })
 export class LoginComponent {
     loginForm = new FormGroup({
-        email: new FormControl(''),
-        password: new FormControl(''),
+        email: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
     })
 
     constructor() {
@@ -23,5 +23,12 @@ export class LoginComponent {
     onSubmit() {
         // TODO: Use EventEmitter with form value
         console.warn(this.loginForm.value)
+    }
+
+    get email() {
+        return this.loginForm.get('email')
+    }
+    get password() {
+        return this.loginForm.get('password')
     }
 }
