@@ -6,7 +6,8 @@
     </div>
     <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="error">
         <div *ngIf="email!.errors?.['required']">E-mail is required</div>
-        <div *ngIf="email!.errors?.['email']">Please enter correct e-mail</div>
+        <!--        <div *ngIf="email!.errors?.['email']">Please enter correct e-mail</div>-->
+        <div *ngIf="email!.errors?.['pattern']">Not valid e-mail</div>
     </div>
 
     <div>
@@ -14,7 +15,8 @@
         <input id="password" type="password" formControlName="password" />
     </div>
     <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="error">
-        Field is required
+        <div *ngIf="password!.errors?.['required']">Password is required</div>
+        <div *ngIf="password!.errors?.['pattern']">Field must contain only letters</div>
     </div>
 
     <button type="submit" [disabled]="loginForm.invalid">Submit</button>
