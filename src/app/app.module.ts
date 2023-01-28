@@ -14,7 +14,8 @@ import { RoutingComponent } from './pages/routing/routing.component'
 import { AppRoutingRoutingModule } from './app-routing-routing.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
-import { UsersComponent } from './pages/users/users.component'
+import { UsersComponent } from './pages/users/users.component';
+import { ProfileComponent } from './pages/profile/profile.component'
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { UsersComponent } from './pages/users/users.component'
         NotFoundComponent,
         HomeComponent,
         UsersComponent,
+        ProfileComponent,
     ],
     imports: [
         BrowserModule,
