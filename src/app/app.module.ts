@@ -9,8 +9,9 @@ import { LoginComponent } from './pages/login/login.component'
 import { ParentComponent } from './pages/parent/parent.component'
 import { ChildComponent } from './pages/parent/child/child.component'
 import { CompAComponent } from './pages/components/comp-a/comp-a.component'
-import { CompBComponent } from './pages/components/comp-b/comp-b.component';
+import { CompBComponent } from './pages/components/comp-b/comp-b.component'
 import { RoutingComponent } from './pages/routing/routing.component'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
     declarations: [
@@ -23,7 +24,20 @@ import { RoutingComponent } from './pages/routing/routing.component'
         LoginComponent,
         RoutingComponent,
     ],
-    imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            // { path: 'home', component: HomeComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'todos', component: TodosComponent },
+            // { path: 'users', component: UsersComponent },
+            // { path: 'profile', component: ProfileComponent },
+            // { path: '404notfound', component: NotFoundComponent },
+        ]),
+    ],
     providers: [],
 
     bootstrap: [AppComponent],
