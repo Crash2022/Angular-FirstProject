@@ -8,5 +8,18 @@
     <!--    <hr />-->
     <!--    <first-login></first-login>-->
     <!--    <hr />-->
-    <first-routing></first-routing>
+    <!--    <first-routing></first-routing>-->
+    <nav>
+        <a
+            class="button"
+            routerLink="/"
+            routerLinkActive="activeButton"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+        >
+        <a class="button" routerLink="/login" routerLinkActive="activeButton">Login</a>
+        <a class="button" routerLink="/todos" routerLinkActive="activeButton">Todos</a>
+    </nav>
+
+    <router-outlet></router-outlet>
 </div>
