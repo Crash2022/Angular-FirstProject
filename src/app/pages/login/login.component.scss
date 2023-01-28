@@ -1,3 +1,24 @@
 .error {
     color: red;
 }
+
+.defaultInput {
+    border: 2px solid blue;
+}
+.errorInput {
+    border: 2px solid red;
+    background-color: gray;
+}
+
+// чтобы не навешивать стили, можно использовать по умолчанию
+// чтобы стили подключались глобально, необходимо вставить их в styles.scss
+//.ng-valid[required], .ng-valid.required  {
+//    border-left: 5px solid #42A948; /* green */
+//}
+//.ng-invalid:not(form)  {
+//    border-left: 5px solid #a94442; /* red */
+//}
+//.ng-pristine:not(form) {
+//    border-left: 5px solid #e1c8c8;
+//}
+
