@@ -11,7 +11,9 @@ import { ChildComponent } from './pages/parent/child/child.component'
 import { CompAComponent } from './pages/components/comp-a/comp-a.component'
 import { CompBComponent } from './pages/components/comp-b/comp-b.component'
 import { RoutingComponent } from './pages/routing/routing.component'
-import { AppRoutingRoutingModule } from './app-routing-routing.module'
+import { AppRoutingRoutingModule } from './app-routing-routing.module';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HomeComponent } from './pages/home/home.component'
 
 @NgModule({
     declarations: [
@@ -23,6 +25,8 @@ import { AppRoutingRoutingModule } from './app-routing-routing.module'
         TodosComponent,
         LoginComponent,
         RoutingComponent,
+        NotFoundComponent,
+        HomeComponent,
     ],
     imports: [
         BrowserModule,
