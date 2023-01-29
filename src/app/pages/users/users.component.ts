@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { User, UsersService } from './services/users.service'
 import { Observable } from 'rxjs'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 
 @Component({
     selector: 'first-users',
@@ -18,9 +18,15 @@ export class UsersComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const page = Number(this.route.snapshot.queryParamMap.get('page'))
+        // 1-ый вариант
+        /*const page = Number(this.route.snapshot.queryParamMap.get('page'))
         const currentPage = page ? page : 1
-        this.getUsers(currentPage)
+        this.getUsers(currentPage)*/
+
+        // 2-ой вариант
+        this.route.queryParams.subscribe((params: Params) => {
+            this.getUsers(params['page'] ? params['page'] : 1)
+        })
     }
 
     getUsers(page: number) {
@@ -31,10 +37,16 @@ export class UsersComponent implements OnInit {
         const page = Number(this.route.snapshot.queryParamMap.get('page'))
         const nextPage = page ? page + 1 : 2
 
-        this.router
-            .navigateByUrl(`/users?page=${nextPage}` /*, { skipLocationChange: true }*/)
+        // 1-ый вариант: достаем query параметры и переходим на следующую страницу
+        /*this.router
+            .navigateByUrl(`/users?page=${nextPage}` /!*, { skipLocationChange: true }*!/)
             .then(() => {
                 this.getUsers(nextPage)
-            })
+            })*/
+
+        // 2-ой вариант // более удобный и краткий
+        this.router.navigate(['/users'], { queryParams: { page: nextPage } }).then(() => {
+            this.getUsers(nextPage)
+        })
     }
 }
