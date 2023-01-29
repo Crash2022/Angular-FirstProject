@@ -1,26 +1,4 @@
 <div>
-    <!--    <first-parent></first-parent>-->
-    <!--    <hr />-->
-    <!--    <first-comp-a></first-comp-a>-->
-    <!--    <first-comp-b></first-comp-b>-->
-    <!--    <hr />-->
-    <!--    <first-todos></first-todos>-->
-    <!--    <hr />-->
-    <!--    <first-login></first-login>-->
-    <!--    <hr />-->
-    <!--    <first-routing></first-routing>-->
-    <nav>
-        <a
-            class="button"
-            routerLink="/"
-            routerLinkActive="activeButton"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
-        >
-        <a class="button" routerLink="/login" routerLinkActive="activeButton">Login</a>
-        <a class="button" routerLink="/todos" routerLinkActive="activeButton">Todos</a>
-        <a class="button" routerLink="/users" routerLinkActive="activeButton">Users</a>
-    </nav>
-
+    <first-navigation></first-navigation>
     <router-outlet></router-outlet>
 </div>
