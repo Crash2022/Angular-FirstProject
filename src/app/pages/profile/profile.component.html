@@ -2,5 +2,14 @@
 <!--иной вариант записи-->
 <!--<div *ngIf="profile$ | async; let profile"></div>-->
 <div *ngIf="profile$ | async as profile">
-    <div>{{ profile.userId }}-{{ profile.fullName }}</div>
+    <div [ngStyle]="{ fontWeight: 'bold' }">{{ profile.userId }}-{{ profile.fullName }}</div>
 </div>
+
+<div>Три способа роутинга</div>
+<div>
+    <button (click)="backToUsersHandler()">BackWithRouter</button>
+</div>
+<div>
+    <button [routerLink]="['/users']">BackWithRouterLink</button>
+</div>
+<div [routerLink]="['/users']" [ngStyle]="{ cursor: 'pointer' }">BackWitDIV - ClickMe</div>
