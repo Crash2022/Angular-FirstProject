@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core'
 
 type LoggerType = 'error' | 'success' | 'info' | 'warning'
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class BeautyLoggerService {
     logger(message: string, messageType: LoggerType) {
         console.log(`%c${message}`, this.getType(messageType))

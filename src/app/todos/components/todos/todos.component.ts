@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Todolists, TodosService } from '../../services/todos.service'
-import { HttpErrorResponse } from '@angular/common/http'
+import { TodosService } from '../../services/todos.service'
 import { Observable, Subscription } from 'rxjs'
+import { Todolists } from '../../models/todos.model'
 
 @Component({
     selector: 'first-todos',

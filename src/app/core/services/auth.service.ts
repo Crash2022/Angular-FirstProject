@@ -1,27 +1,9 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environments'
-import { Observable } from 'rxjs'
+import { MeResponse, ResultCodes } from '../models/core.model'
 
-interface MeResponse {
-    data: {
-        id: number
-        login: string
-        email: string
-    }
-    messages: string[]
-    fieldErrors: string[]
-    resultCode: number
-}
-
-enum ResultCodes {
-    success = 0,
-    error = 1,
-}
-
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
     isAuth = false
 

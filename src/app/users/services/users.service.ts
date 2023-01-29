@@ -2,21 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environments'
 import { map, Observable } from 'rxjs'
-
-interface UserResponse {
-    items: User[]
-    totalCount: number
-}
-
-export interface User {
-    id: number
-    name: string
-    photos: {
-        small: string
-        large: string
-    }
-    followed: boolean
-}
+import { User, UserResponse } from '../models/users.model'
 
 @Injectable({
     providedIn: 'root',

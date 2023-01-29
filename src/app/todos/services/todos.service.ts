@@ -3,21 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { BehaviorSubject, catchError, EMPTY, map, Observable, throwError } from 'rxjs'
 import { environment } from '../../../environments/environments'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
-
-export interface Todolists {
-    addedDate: string
-    id: string
-    order: number
-    title: string
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export interface BaseTodoResponse<T = {}> {
-    data: T
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: number
-}
+import { Todolists } from '../models/todos.model'
+import { BaseTodoResponse } from '../../core/models/core.model'
 
 @Injectable({
     providedIn: 'root',
