@@ -1,0 +1,10 @@
+<p>users works!</p>
+<div *ngFor="let user of users$ | async">
+    <div>
+        <a [routerLink]="['/profile', user.id]"> {{ user.id }}-{{ user.name }} </a>
+    </div>
+</div>
+<div>
+    <button [routerLink]="['/users']" [queryParams]="{ page: 1 }">1st Page</button>
+    <button (click)="nextPageHandler()">Next Page</button>
+</div>

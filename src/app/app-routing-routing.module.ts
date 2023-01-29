@@ -1,19 +1,10 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { LoginComponent } from './pages/login/login.component'
-import { TodosComponent } from './pages/todos/todos.component'
-import { NotFoundComponent } from './pages/not-found/not-found.component'
-import { HomeComponent } from './pages/home/home.component'
-import { UsersComponent } from './pages/users/users.component'
-import { ProfileComponent } from './pages/profile/profile.component'
-import { AuthGuard } from './guards/auth.guard'
+import { NotFoundComponent } from './shared/components/not-found/not-found.component'
+import { HomeComponent } from './home/components/home/home.component'
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'todos', component: TodosComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: UsersComponent },
-    { path: 'profile/:userId', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'page-not-found', component: NotFoundComponent },
     { path: '**', redirectTo: 'page-not-found' },
 ]
