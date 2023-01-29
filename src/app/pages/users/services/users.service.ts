@@ -22,20 +22,23 @@ export interface User {
     providedIn: 'root',
 })
 export class UsersService {
-    httpOptions = {
+    // замена на interceptor
+    /*httpOptions = {
         withCredentials: true,
         headers: {
             'api-key': `${environment.apiKey}`,
         },
         // из урока - не работает!
         // headers: new HttpHeaders().append('apiKey', environment['apiKey']),
-    }
+    }*/
 
     constructor(private http: HttpClient) {}
 
     getUsers(page: number): Observable<User[]> {
         return this.http
-            .get<UserResponse>(`${environment.baseNetworkUrl}/users?page=${page}`, this.httpOptions)
+            .get<UserResponse>(
+                `${environment.baseNetworkUrl}/users?page=${page}` /*, this.httpOptions*/
+            )
             .pipe(map(el => el.items))
     }
 }

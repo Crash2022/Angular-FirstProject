@@ -23,12 +23,13 @@ export interface BaseTodoResponse<T = {}> {
     providedIn: 'root',
 })
 export class TodosService {
-    httpOptions = {
+    // замена на interceptor
+    /*httpOptions = {
         withCredentials: true,
         headers: {
             'api-key': `${environment.apiKey}`,
         },
-    }
+    }*/
 
     // создаем начальное значение
     todos$: BehaviorSubject<Todolists[]> = new BehaviorSubject<Todolists[]>([])
@@ -37,7 +38,7 @@ export class TodosService {
 
     getTodos() {
         this.http
-            .get<Todolists[]>(`${environment.baseUrl}/todo-lists`, this.httpOptions)
+            .get<Todolists[]>(`${environment.baseUrl}/todo-lists` /*, this.httpOptions*/)
             .pipe(catchError(this.errorHandler.bind(this)))
             .subscribe(todos => {
                 this.todos$.next(todos)
@@ -50,8 +51,8 @@ export class TodosService {
         this.http
             .post<BaseTodoResponse<{ item: Todolists }>>(
                 `${environment.baseUrl}/todo-lists`,
-                { title },
-                this.httpOptions
+                { title } /*,
+                this.httpOptions*/
             )
             .pipe(
                 catchError(this.errorHandler.bind(this)),
@@ -75,8 +76,8 @@ export class TodosService {
     deleteTodo(todolistId: string) {
         this.http
             .delete<BaseTodoResponse>(
-                `${environment.baseUrl}/todo-lists/${todolistId}`,
-                this.httpOptions
+                `${environment.baseUrl}/todo-lists/${todolistId}` /*,
+                this.httpOptions*/
             )
             .pipe(
                 catchError(this.errorHandler.bind(this)),
@@ -98,8 +99,8 @@ export class TodosService {
         this.http
             .put<BaseTodoResponse>(
                 `${environment.baseUrl}/todo-lists/${todolistId}`,
-                { title: newTitle },
-                this.httpOptions
+                { title: newTitle } /*,
+                this.httpOptions*/
             )
             .pipe(
                 catchError(this.errorHandler.bind(this)),

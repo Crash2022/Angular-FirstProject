@@ -31,21 +31,21 @@ interface Contacts {
     providedIn: 'root',
 })
 export class ProfileService {
-    httpOptions = {
+    // замена на interceptor
+    /*httpOptions = {
         withCredentials: true,
         headers: {
             'api-key': `${environment.apiKey}`,
         },
         // из урока - не работает!
         // headers: new HttpHeaders().append('apiKey', environment['apiKey']),
-    }
+    }*/
 
     constructor(private http: HttpClient) {}
 
     getProfile(userId: number): Observable<ProfileResponse> {
         return this.http.get<ProfileResponse>(
-            `${environment.baseNetworkUrl}/profile/${userId}`,
-            this.httpOptions
+            `${environment.baseNetworkUrl}/profile/${userId}` /*, this.httpOptions*/
         )
     }
 }
