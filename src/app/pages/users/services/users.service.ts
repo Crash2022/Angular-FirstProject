@@ -33,9 +33,9 @@ export class UsersService {
 
     constructor(private http: HttpClient) {}
 
-    getUsers(): Observable<User[]> {
+    getUsers(page: number): Observable<User[]> {
         return this.http
-            .get<UserResponse>(`${environment.baseNetworkUrl}/users`, this.httpOptions)
+            .get<UserResponse>(`${environment.baseNetworkUrl}/users?page=${page}`, this.httpOptions)
             .pipe(map(el => el.items))
     }
 }

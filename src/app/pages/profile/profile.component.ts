@@ -12,9 +12,9 @@ export class ProfileComponent implements OnInit {
     profile$!: Observable<ProfileResponse>
 
     constructor(
+        private profileService: ProfileService,
         private route: ActivatedRoute,
-        private router: Router,
-        private profileService: ProfileService
+        private router: Router
     ) {}
 
     ngOnInit(): void {
