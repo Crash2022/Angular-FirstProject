@@ -14,6 +14,11 @@ interface MeResponse {
     resultCode: number
 }
 
+enum ResultCodes {
+    success = 0,
+    error = 1,
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -22,9 +27,9 @@ export class AuthService {
 
     constructor(private http: HttpClient) {}
 
-    getUsers() {
+    authMe() {
         return this.http.get<MeResponse>(`${environment.baseNetworkUrl}/auth/me`).subscribe(res => {
-            if (res.resultCode === 0) {
+            if (res.resultCode === ResultCodes.success) {
                 this.isAuth = true
             }
         })
