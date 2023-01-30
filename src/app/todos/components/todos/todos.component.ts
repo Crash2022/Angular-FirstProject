@@ -34,6 +34,7 @@ export class TodosComponent implements OnInit {
         this.todosService.createTodo(this.todoTitle)
         this.todoTitle = ''
     }
+    // принимаем колбэк из дочерней компоненты
     deleteTodo(todolistId: string) {
         this.todosService.deleteTodo(todolistId)
     }
