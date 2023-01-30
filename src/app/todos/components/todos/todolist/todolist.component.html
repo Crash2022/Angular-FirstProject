@@ -1,12 +1,15 @@
 <div class="todolist_item">
-    <div *ngIf="isTitleEditMode; else NotEditMode">
-        <input type="text" (blur)="updateTodolistTitleHandler()" [(ngModel)]="newTitle" />
-    </div>
-    <ng-template #NotEditMode>
-        <div (dblclick)="activateTitleEditModeHandler()" class="todolist_title">
-            {{ todolist.title }}
+    <div class="todolist_item_title">
+        <div *ngIf="isTitleEditMode; else NotEditMode" class="todolist_inputField">
+            <input type="text" (blur)="updateTodolistTitleHandler()" [(ngModel)]="newTitle" />
         </div>
-    </ng-template>
-    <button (click)="deleteTodoHandler()">X</button>
+        <ng-template #NotEditMode>
+            <div (dblclick)="activateTitleEditModeHandler()" class="todolist_title">
+                {{ todolist.title }}
+            </div>
+        </ng-template>
+        <button (click)="deleteTodoHandler()">X</button>
+    </div>
+
+    <todolist-tasks [todolistId]="todolist.id"></todolist-tasks>
 </div>
-<todolist-tasks [todolistId]="todolist.id"></todolist-tasks>
