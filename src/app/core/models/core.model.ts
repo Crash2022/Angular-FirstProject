@@ -1,4 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-types
+import { TaskAPIType } from '../../todos/models/todos.model'
+
 export interface BaseTodoResponse<T = {}> {
     data: T
     messages: string[]
@@ -20,4 +22,10 @@ export interface MeResponse {
 export enum ResultCodes {
     success = 0,
     error = 1,
+}
+
+export interface TasksResponseType {
+    error: string | null
+    items: TaskAPIType[]
+    totalCount: number
 }

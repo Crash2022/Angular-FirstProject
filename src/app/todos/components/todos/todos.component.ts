@@ -19,6 +19,7 @@ export class TodosComponent implements OnInit {
 
     // в конструкторе делается импорт нужных сервисов
     constructor(private todosService: TodosService) {}
+
     // инициализация компоненты
     ngOnInit(): void {
         this.todos$ = this.todosService.todos$

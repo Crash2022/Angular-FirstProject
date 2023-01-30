@@ -4,8 +4,8 @@
         <input type="text" placeholder="Enter todolist title" [(ngModel)]="todoTitle" />
         <button (click)="createTodo()">+</button>
     </div>
-    <div class="todolist_getTlError">
-        <span *ngIf="error; else NotError">{{ error }}</span>
+    <div>
+        <span class="todolist_getTlError" *ngIf="error; else NotError">{{ error }}</span>
     </div>
     <ng-template #NotError>
         <todolist-todolist

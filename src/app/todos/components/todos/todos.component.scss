@@ -4,8 +4,6 @@
     align-items: center;
 
     .todolist_title {
-        //font-weight: bold;
-        //font-size: 30px;
         margin: 20px 0;
     }
     .todolist_addForm {
@@ -31,17 +29,6 @@
             }
         }
     }
-    //.todolists {
-    //
-    //}
-    //.todolist_item {
-    //    border: 1px solid black;
-    //    margin: 5px;
-    //    padding: 5px;
-    //    display: flex;
-    //    justify-content: center;
-    //    color: black;
-    //}
     .todolist_getTlError {
         color: red;
         font-size: 20px;
