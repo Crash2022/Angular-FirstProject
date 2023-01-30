@@ -62,23 +62,25 @@ export class TodosService {
                 this.todos$.next(todo)
             })
     }
-    // updateTodo(todolistId: string, newTitle: string) {
-    //     this.http
-    //         .put<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`, {
-    //             title: newTitle,
-    //         })
-    //         .pipe(
-    //             catchError(this.errorHandler.bind(this)),
-    //             map(() => {
-    //                 return this.todos$
-    //                     .getValue()
-    //                     .map(tl => (tl.id === todolistId ? { ...tl, title: newTitle } : tl))
-    //             })
-    //         )
-    //         .subscribe(todo => {
-    //             this.todos$.next(todo)
-    //         })
-    // }
+    updateTodoTitle(data: { todolistId: string; newTitle: string }) {
+        this.http
+            .put<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${data.todolistId}`, {
+                title: data.newTitle,
+            })
+            .pipe(
+                catchError(this.errorHandler.bind(this)),
+                map(() => {
+                    return this.todos$
+                        .getValue()
+                        .map(tl =>
+                            tl.id === data.todolistId ? { ...tl, title: data.newTitle } : tl
+                        )
+                })
+            )
+            .subscribe(todo => {
+                this.todos$.next(todo)
+            })
+    }
 
     // общий обработчик ошибок
     private errorHandler(error: HttpErrorResponse) {

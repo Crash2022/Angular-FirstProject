@@ -5,13 +5,14 @@
         <button (click)="createTodo()">+</button>
     </div>
     <div class="todolist_getTlError">
-        <span *ngIf="error; else elseNotError">{{ error }}</span>
+        <span *ngIf="error; else NotError">{{ error }}</span>
     </div>
-    <ng-template #elseNotError>
+    <ng-template #NotError>
         <todolist-todolist
             *ngFor="let todo of todos$ | async"
             [todolist]="todo"
             (deleteTodoEvent)="deleteTodo($event)"
+            (updateTodoEvent)="updateTodoTitle($event)"
         ></todolist-todolist>
     </ng-template>
 </div>

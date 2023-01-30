@@ -1,4 +1,11 @@
 <div class="todolist_item">
-    <div>{{ todolist.addedDate }}-{{ todolist.title }}</div>
+    <div *ngIf="isTitleEditMode; else NotEditMode">
+        <input type="text" (blur)="updateTodolistTitleHandler()" [(ngModel)]="newTitle" />
+    </div>
+    <ng-template #NotEditMode>
+        <div (dblclick)="activateTitleEditModeHandler()">
+            {{ todolist.title }}
+        </div>
+    </ng-template>
     <button (click)="deleteTodoHandler()">X</button>
 </div>
