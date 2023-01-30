@@ -1,4 +1,4 @@
-export interface Todolists {
+export interface Todolist {
     addedDate: string
     id: string
     order: number

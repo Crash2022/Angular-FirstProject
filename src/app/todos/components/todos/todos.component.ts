@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { TodosService } from '../../services/todos.service'
 import { Observable } from 'rxjs'
-import { Todolists } from '../../models/todos.model'
+import { Todolist } from '../../models/todos.model'
 
 @Component({
     selector: 'todolist-todos',
@@ -9,12 +9,13 @@ import { Todolists } from '../../models/todos.model'
     styleUrls: ['./todos.component.scss'],
 })
 export class TodosComponent implements OnInit {
-    // делаем подписку
-    todos$!: Observable<Todolists[]>
+    // делаем подписку на поток, чтобы была перерисовка при изменении
+    todos$!: Observable<Todolist[]>
     // значение для ошибки
     // error = 'Network error. Please try again later.'
     error = ''
 
+    // в конструкторе делается импорт нужных сервисов
     constructor(private todosService: TodosService) {}
     // инициализация компоненты
     ngOnInit(): void {
@@ -25,18 +26,18 @@ export class TodosComponent implements OnInit {
     getTodos() {
         this.todosService.getTodos()
     }
-    createTodo() {
-        const randomNumber = Math.floor(Math.random() * 100)
-        const title = 'Angular' + randomNumber
-        this.todosService.createTodo(title)
-    }
-    deleteTodo() {
-        const todolistId = '22c772ec-0980-416c-954e-1c7a04d9e405'
-        this.todosService.deleteTodo(todolistId)
-    }
-    updateTodo() {
-        const todolistId = '263dfd11-2d17-4029-a412-454844206a2f'
-        const newTitle = 'Updated Title'
-        this.todosService.updateTodo(todolistId, newTitle)
-    }
+    // createTodo() {
+    //     const randomNumber = Math.floor(Math.random() * 100)
+    //     const title = 'Angular' + randomNumber
+    //     this.todosService.createTodo(title)
+    // }
+    // deleteTodo() {
+    //     const todolistId = '22c772ec-0980-416c-954e-1c7a04d9e405'
+    //     this.todosService.deleteTodo(todolistId)
+    // }
+    // updateTodo() {
+    //     const todolistId = '263dfd11-2d17-4029-a412-454844206a2f'
+    //     const newTitle = 'Updated Title'
+    //     this.todosService.updateTodo(todolistId, newTitle)
+    // }
 }
