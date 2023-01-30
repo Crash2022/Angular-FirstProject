@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "first",
+      "prefix": "todolist",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

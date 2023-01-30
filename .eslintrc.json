@@ -20,7 +20,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "first",
+            "prefix": "todolist",
             "style": "camelCase"
           }
         ],
@@ -28,7 +28,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "first",
+            "prefix": "todolist",
             "style": "kebab-case"
           }
         ]
