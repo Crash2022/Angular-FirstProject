@@ -3,6 +3,22 @@
     margin: 5px;
     padding: 5px;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     color: black;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+        background-color: red;
+        color: white;
+        border: none;
+        height: 19px;
+        width: 19px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 }

@@ -1,5 +1,9 @@
 <div class="todolist_box">
-    <div class="todolist_title">Angular Todolist Project</div>
+    <h1 class="todolist_title">Angular Todolist Project</h1>
+    <div class="todolist_addForm">
+        <input type="text" placeholder="Enter todolist title" [(ngModel)]="todoTitle" />
+        <button (click)="createTodo()">+</button>
+    </div>
     <!--<div>-->
     <!--    <button (click)="createTodo()">Create New Todo</button>-->
     <!--    <button (click)="deleteTodo()">Delete Todo</button>-->
@@ -9,11 +13,9 @@
         <span *ngIf="error; else elseNotError">{{ error }}</span>
     </div>
     <ng-template #elseNotError>
-        <!--        <div class="todolists" *ngFor="let todo of todos$ | async">-->
         <todolist-todolist
             *ngFor="let todo of todos$ | async"
             [todolist]="todo"
         ></todolist-todolist>
-        <!--        </div>-->
     </ng-template>
 </div>

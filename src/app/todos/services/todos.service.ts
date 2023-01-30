@@ -32,36 +32,36 @@ export class TodosService {
                 this.todos$.next(todos)
             })
     }
-    // createTodo(title: string) {
-    //     this.http
-    //         .post<BaseTodoResponse<{ item: Todolists }>>(`${environment.baseUrl}/todo-lists`, {
-    //             title,
-    //         })
-    //         .pipe(
-    //             catchError(this.errorHandler.bind(this)),
-    //             map(res => {
-    //                 const newTodo = res.data.item
-    //                 const stateTodos = this.todos$.getValue()
-    //                 return [newTodo, ...stateTodos]
-    //             })
-    //         )
-    //         .subscribe(todos => {
-    //             this.todos$.next(todos)
-    //         })
-    // }
-    // deleteTodo(todolistId: string) {
-    //     this.http
-    //         .delete<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`)
-    //         .pipe(
-    //             catchError(this.errorHandler.bind(this)),
-    //             map(() => {
-    //                 return this.todos$.getValue().filter(tl => tl.id !== todolistId)
-    //             })
-    //         )
-    //         .subscribe(todo => {
-    //             this.todos$.next(todo)
-    //         })
-    // }
+    createTodo(title: string) {
+        this.http
+            .post<BaseTodoResponse<{ item: Todolist }>>(`${environment.baseUrl}/todo-lists`, {
+                title,
+            })
+            .pipe(
+                catchError(this.errorHandler.bind(this)),
+                map(res => {
+                    const stateTodos = this.todos$.getValue()
+                    const newTodo = res.data.item
+                    return [newTodo, ...stateTodos]
+                })
+            )
+            .subscribe(todos => {
+                this.todos$.next(todos)
+            })
+    }
+    deleteTodo(todolistId: string) {
+        this.http
+            .delete<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`)
+            .pipe(
+                catchError(this.errorHandler.bind(this)),
+                map(() => {
+                    return this.todos$.getValue().filter(tl => tl.id !== todolistId)
+                })
+            )
+            .subscribe(todo => {
+                this.todos$.next(todo)
+            })
+    }
     // updateTodo(todolistId: string, newTitle: string) {
     //     this.http
     //         .put<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`, {
