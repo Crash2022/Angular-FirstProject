@@ -8,4 +8,8 @@ import { TaskAPIType } from '../../../../../models/todos.model'
 })
 export class TaskComponent {
     @Input() task!: TaskAPIType
+
+    deleteTaskHandler() {
+        alert('task was deleted')
+    }
 }

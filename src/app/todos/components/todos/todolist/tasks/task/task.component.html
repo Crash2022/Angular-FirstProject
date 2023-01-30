@@ -1,7 +1,7 @@
 <div class="task_item">
     <div class="task_item_title">
-        <div>{{ task.title }}</div>
-        <div><input type="checkbox" /></div>
+        <div><input type="checkbox" [(ngModel)]="task.status" /></div>
+        <div class="task_item_title_name">{{ task.title }}</div>
     </div>
-    <button>X</button>
+    <button (click)="deleteTaskHandler()">X</button>
 </div>

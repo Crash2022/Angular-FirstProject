@@ -5,9 +5,27 @@
 
     .task_item_title {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        width: 150px;
-        margin-right: 20px;
+
+        .task_item_title_name {
+            margin-left: 5px;
+        }
+    }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+        background-color: red;
+        color: white;
+        border: none;
+        height: 19px;
+        width: 19px;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

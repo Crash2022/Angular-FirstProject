@@ -3,7 +3,7 @@
         <input type="text" (blur)="updateTodolistTitleHandler()" [(ngModel)]="newTitle" />
     </div>
     <ng-template #NotEditMode>
-        <div (dblclick)="activateTitleEditModeHandler()">
+        <div (dblclick)="activateTitleEditModeHandler()" class="todolist_title">
             {{ todolist.title }}
         </div>
     </ng-template>
