@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { environment } from '../../../environments/environments'
-import { BehaviorSubject, catchError, EMPTY } from 'rxjs'
+import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
 import { TaskAPIType } from '../models/todos.model'
 import { TasksResponseType } from '../../core/models/core.model'
@@ -23,6 +23,14 @@ export class TasksService {
                 this.tasks$.next(tasks.items)
             })
     }
+    // getTasks(todolistId: string): Observable<TaskAPIType[]> {
+    //     this.http
+    //         .get<TasksResponseType>(`${environment.baseUrl}/todo-lists/${todolistId}/tasks`)
+    //         .pipe(
+    //             map(res => res.items),
+    //             catchError(this.errorHandler.bind(this))
+    //         )
+    // }
 
     // общий обработчик ошибок
     private errorHandler(error: HttpErrorResponse) {
