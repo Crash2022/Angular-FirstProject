@@ -13,20 +13,20 @@ export class TasksComponent implements OnInit {
     @Input() todolistId!: string
 
     // делаем подписку на поток, чтобы была перерисовка при изменении
-    tasks$?: Observable<TaskAPIType[]>
+    tasks$!: Observable<TaskAPIType[]>
 
     // в конструкторе делается импорт нужных сервисов
     constructor(private tasksService: TasksService) {}
 
     // инициализация компоненты
     ngOnInit(): void {
-        this.tasks$ = this.tasksService.tasks$
-        this.getTasks(this.todolistId)
+        // this.tasks$ = this.tasksService.tasks$
+        // this.getTasks(this.todolistId)
 
-        // this.tasks$ = this.tasksService.getTasks(this.todolistId)
+        this.tasks$ = this.tasksService.getTasks(this.todolistId)
     }
 
-    getTasks(todolistId: string) {
+    /*getTasks(todolistId: string) {
         this.tasksService.getTasks(todolistId)
-    }
+    }*/
 }

@@ -25,7 +25,7 @@ export enum ResultCodes {
 }
 
 export interface TasksResponseType {
-    error: string | null
     items: TaskAPIType[]
     totalCount: number
+    error: string | null
 }

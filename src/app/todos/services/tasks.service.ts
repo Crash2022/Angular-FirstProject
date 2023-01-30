@@ -11,26 +11,27 @@ import { TasksResponseType } from '../../core/models/core.model'
 })
 export class TasksService {
     // создаем начальное значение (initialState)
-    tasks$: BehaviorSubject<TaskAPIType[]> = new BehaviorSubject<TaskAPIType[]>([])
+    // tasks$: BehaviorSubject<TaskAPIType[]> = new BehaviorSubject<TaskAPIType[]>([])
 
     constructor(private http: HttpClient, private beautyLoggerService: BeautyLoggerService) {}
 
-    getTasks(todolistId: string) {
+    // почему так не работает? приходит id с одного тудулиста!
+    /*getTasks(todolistId: string) {
         this.http
             .get<TasksResponseType>(`${environment.baseUrl}/todo-lists/${todolistId}/tasks`)
             .pipe(catchError(this.errorHandler.bind(this)))
             .subscribe(tasks => {
                 this.tasks$.next(tasks.items)
             })
+    }*/
+    getTasks(todolistId: string): Observable<TaskAPIType[]> {
+        return this.http
+            .get<TasksResponseType>(`${environment.baseUrl}/todo-lists/${todolistId}/tasks`)
+            .pipe(
+                map(res => res.items),
+                catchError(this.errorHandler.bind(this))
+            )
     }
-    // getTasks(todolistId: string): Observable<TaskAPIType[]> {
-    //     this.http
-    //         .get<TasksResponseType>(`${environment.baseUrl}/todo-lists/${todolistId}/tasks`)
-    //         .pipe(
-    //             map(res => res.items),
-    //             catchError(this.errorHandler.bind(this))
-    //         )
-    // }
 
     // общий обработчик ошибок
     private errorHandler(error: HttpErrorResponse) {
