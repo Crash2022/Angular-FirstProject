@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { BehaviorSubject, catchError, EMPTY, map, Observable, throwError } from 'rxjs'
+import { BehaviorSubject, catchError, EMPTY, map } from 'rxjs'
 import { environment } from '../../../environments/environments'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
 import { Todolists } from '../models/todos.model'
@@ -31,16 +31,11 @@ export class TodosService {
                 this.todos$.next(todos)
             })
     }
-    /*getTodos(): Observable<Todolists[]> {
-        return this.http.get<Todolists[]>(`${environment.baseUrl}/todo-lists`, this.httpOptions)
-    }*/
     createTodo(title: string) {
         this.http
-            .post<BaseTodoResponse<{ item: Todolists }>>(
-                `${environment.baseUrl}/todo-lists`,
-                { title } /*,
-                this.httpOptions*/
-            )
+            .post<BaseTodoResponse<{ item: Todolists }>>(`${environment.baseUrl}/todo-lists`, {
+                title,
+            })
             .pipe(
                 catchError(this.errorHandler.bind(this)),
                 map(res => {
@@ -53,19 +48,9 @@ export class TodosService {
                 this.todos$.next(todos)
             })
     }
-    /*createTodo(title: string): Observable<BaseTodoResponse<{ item: Todolists }>> {
-        return this.http.post<BaseTodoResponse<{ item: Todolists }>>(
-            `${environment.baseUrl}/todo-lists`,
-            { title },
-            this.httpOptions
-        )
-    }*/
     deleteTodo(todolistId: string) {
         this.http
-            .delete<BaseTodoResponse>(
-                `${environment.baseUrl}/todo-lists/${todolistId}` /*,
-                this.httpOptions*/
-            )
+            .delete<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`)
             .pipe(
                 catchError(this.errorHandler.bind(this)),
                 map(() => {
@@ -76,19 +61,11 @@ export class TodosService {
                 this.todos$.next(todo)
             })
     }
-    /*deleteTodo(todolistId: string): Observable<BaseTodoResponse> {
-        return this.http.delete<BaseTodoResponse>(
-            `${environment.baseUrl}/todo-lists/${todolistId}`,
-            this.httpOptions
-        )
-    }*/
     updateTodo(todolistId: string, newTitle: string) {
         this.http
-            .put<BaseTodoResponse>(
-                `${environment.baseUrl}/todo-lists/${todolistId}`,
-                { title: newTitle } /*,
-                this.httpOptions*/
-            )
+            .put<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`, {
+                title: newTitle,
+            })
             .pipe(
                 catchError(this.errorHandler.bind(this)),
                 map(() => {
@@ -101,13 +78,6 @@ export class TodosService {
                 this.todos$.next(todo)
             })
     }
-    /*updateTodo(todolistId: string, newTitle: string): Observable<BaseTodoResponse> {
-        return this.http.put<BaseTodoResponse>(
-            `${environment.baseUrl}/todo-lists/${todolistId}`,
-            { title: newTitle },
-            this.httpOptions
-        )
-    }*/
 
     // общий обработчик ошибок
     private errorHandler(error: HttpErrorResponse) {

@@ -12,6 +12,7 @@ export class TodosComponent implements OnInit {
     // делаем подписку
     todos$!: Observable<Todolists[]>
     // значение для ошибки
+    // error = 'Network error. Please try again later.'
     error = ''
 
     constructor(private todosService: TodosService) {}

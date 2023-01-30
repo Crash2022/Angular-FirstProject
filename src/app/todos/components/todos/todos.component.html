@@ -1,14 +1,16 @@
-<div>
-    <p>todos works!</p>
+<div class="todolist_box">
+    <div class="todolist_title">Angular Todolist Project</div>
+    <!--<div>-->
+    <!--    <button (click)="createTodo()">Create New Todo</button>-->
+    <!--    <button (click)="deleteTodo()">Delete Todo</button>-->
+    <!--    <button (click)="updateTodo()">Update Todo Title</button>-->
+    <!--</div>-->
+    <div class="todolist_getTlError">
+        <span *ngIf="error; else elseNotError">{{ error }}</span>
+    </div>
+    <ng-template #elseNotError>
+        <div class="todolist_item" *ngFor="let todo of todos$ | async">
+            {{ todo.addedDate }}-{{ todo.title }}
+        </div>
+    </ng-template>
 </div>
-<div>
-    <button (click)="createTodo()">Create New Todo</button>
-    <button (click)="deleteTodo()">Delete Todo</button>
-    <button (click)="updateTodo()">Update Todo Title</button>
-</div>
-<div>
-    <h1 *ngIf="error; else elseNotError">{{ error }}</h1>
-</div>
-<ng-template #elseNotError>
-    <div *ngFor="let todo of todos$ | async">{{ todo.addedDate }}-{{ todo.title }}</div>
-</ng-template>
