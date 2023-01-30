@@ -4,11 +4,6 @@
         <input type="text" placeholder="Enter todolist title" [(ngModel)]="todoTitle" />
         <button (click)="createTodo()">+</button>
     </div>
-    <!--<div>-->
-    <!--    <button (click)="createTodo()">Create New Todo</button>-->
-    <!--    <button (click)="deleteTodo()">Delete Todo</button>-->
-    <!--    <button (click)="updateTodo()">Update Todo Title</button>-->
-    <!--</div>-->
     <div class="todolist_getTlError">
         <span *ngIf="error; else elseNotError">{{ error }}</span>
     </div>
@@ -16,6 +11,7 @@
         <todolist-todolist
             *ngFor="let todo of todos$ | async"
             [todolist]="todo"
+            (deleteTodoEvent)="deleteTodo($event)"
         ></todolist-todolist>
     </ng-template>
 </div>

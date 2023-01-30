@@ -1,12 +1,12 @@
 .todolist_item {
     border: 1px solid black;
     margin: 5px;
-    padding: 5px;
+    padding: 10px;
     display: flex;
-    //justify-content: center;
     justify-content: space-between;
     align-items: center;
     color: black;
+    border-radius: 5px;
 
     button {
         display: flex;
