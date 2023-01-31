@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { TaskAPIType } from '../../../../../models/todos.model'
 
 @Component({
@@ -8,8 +8,9 @@ import { TaskAPIType } from '../../../../../models/todos.model'
 })
 export class TaskComponent {
     @Input() task!: TaskAPIType
+    @Output() deleteTaskEvent = new EventEmitter<{ todolistId: string; taskId: string }>()
 
     deleteTaskHandler() {
-        alert('task was deleted')
+        this.deleteTaskEvent.emit({ todolistId: this.task.todoListId, taskId: this.task.id })
     }
 }

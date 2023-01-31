@@ -37,4 +37,8 @@ export class TasksComponent implements OnInit {
         this.tasksService.addTask({ todolistId: this.todolistId, title: this.taskTitle })
         this.taskTitle = ''
     }
+
+    deleteTask(data: { todolistId: string; taskId: string }) {
+        this.tasksService.deleteTask(data)
+    }
 }

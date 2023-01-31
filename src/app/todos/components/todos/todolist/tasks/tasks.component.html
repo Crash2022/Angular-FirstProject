@@ -8,4 +8,8 @@
     />
 </div>
 
-<todolist-task *ngFor="let task of tasks$ | async" [task]="task"></todolist-task>
+<todolist-task
+    *ngFor="let task of tasks$ | async"
+    [task]="task"
+    (deleteTaskEvent)="deleteTask($event)"
+></todolist-task>

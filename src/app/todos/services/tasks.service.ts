@@ -54,6 +54,26 @@ export class TasksService {
             })
     }
 
+    deleteTask(data: { todolistId: string; taskId: string }) {
+        return this.http
+            .delete<BaseTodoResponse>(
+                `${environment.baseUrl}/todo-lists/${data.todolistId}/tasks/${data.taskId}`
+            )
+            .pipe(
+                map(() => {
+                    const stateTasks = this.tasks$.getValue()
+                    const currentTasks = stateTasks[data.todolistId]
+                    const filteredTasks = currentTasks.filter(t => t.id !== data.taskId)
+                    stateTasks[data.todolistId] = filteredTasks
+                    return stateTasks
+                }),
+                catchError(this.errorHandler.bind(this))
+            )
+            .subscribe((tasks: DomainTask) => {
+                this.tasks$.next(tasks)
+            })
+    }
+
     // общий обработчик ошибок
     private errorHandler(error: HttpErrorResponse) {
         this.beautyLoggerService.logger(error.message, 'error')
