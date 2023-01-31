@@ -14,6 +14,7 @@ export class TodosComponent implements OnInit {
     // значение для ошибки
     // error = 'Network error. Please try again later.'
     error = ''
+
     // значение для названия тудулиста
     todoTitle = ''
 
