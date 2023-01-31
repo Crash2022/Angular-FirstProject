@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { map, Observable } from 'rxjs'
-import { TaskAPIType } from '../../../../models/todos.model'
+import { TaskAPIType, UpdateTaskModelType } from '../../../../models/todos.model'
 import { TasksService } from '../../../../services/tasks.service'
 
 @Component({
@@ -40,5 +40,9 @@ export class TasksComponent implements OnInit {
 
     deleteTask(data: { todolistId: string; taskId: string }) {
         this.tasksService.deleteTask(data)
+    }
+
+    updateTask(data: { todolistId: string; taskId: string; model: UpdateTaskModelType }) {
+        this.tasksService.updateTaskStatus(data)
     }
 }

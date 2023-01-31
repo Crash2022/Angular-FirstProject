@@ -5,20 +5,25 @@ export interface Todolist {
     title: string
 }
 
-export interface TaskAPIType {
-    todoListId: string
-    id: string
-    title: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    description: string
-    addedDate: string
-    startDate: string
-    deadline: string
-    order: number
+export interface DomainTask {
+    [key: string]: TaskAPIType[]
 }
 
-export enum TaskStatuses {
+export interface TaskAPIType extends UpdateTaskModelType {
+    todoListId: string
+    id: string
+    order: number
+    addedDate: string
+    // берем типы (наследуемся) от другого типа
+    // title: string
+    // status: TaskStatusEnum
+    // priority: TaskPriorities
+    // description: string
+    // startDate: string
+    // deadline: string
+}
+
+export enum TaskStatusEnum {
     New = 0,
     InProgress = 1,
     Completed = 2,
@@ -33,6 +38,11 @@ export enum TaskPriorities {
     Later = 4,
 }
 
-export interface DomainTask {
-    [key: string]: TaskAPIType[]
+export interface UpdateTaskModelType {
+    title: string
+    status: TaskStatusEnum
+    priority: TaskPriorities
+    description: string
+    startDate: string
+    deadline: string
 }

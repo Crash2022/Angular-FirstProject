@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { environment } from '../../../environments/environments'
 import { BehaviorSubject, catchError, EMPTY, map } from 'rxjs'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
-import { DomainTask, TaskAPIType } from '../models/todos.model'
+import { DomainTask, TaskAPIType, UpdateTaskModelType } from '../models/todos.model'
 import { BaseTodoResponse, TasksResponseType } from '../../core/models/core.model'
 
 @Injectable({
@@ -65,6 +65,29 @@ export class TasksService {
                     const currentTasks = stateTasks[data.todolistId]
                     const filteredTasks = currentTasks.filter(t => t.id !== data.taskId)
                     stateTasks[data.todolistId] = filteredTasks
+                    return stateTasks
+                }),
+                catchError(this.errorHandler.bind(this))
+            )
+            .subscribe((tasks: DomainTask) => {
+                this.tasks$.next(tasks)
+            })
+    }
+
+    updateTaskStatus(data: { todolistId: string; taskId: string; model: UpdateTaskModelType }) {
+        return this.http
+            .put<BaseTodoResponse>(
+                `${environment.baseUrl}/todo-lists/${data.todolistId}/tasks/${data.taskId}`,
+                data.model
+            )
+            .pipe(
+                map(() => {
+                    const stateTasks = this.tasks$.getValue()
+                    const currentTasks = stateTasks[data.todolistId]
+                    const newTasks = currentTasks.map(t =>
+                        t.id === data.taskId ? { ...t, ...data.model } : t
+                    )
+                    stateTasks[data.todolistId] = newTasks
                     return stateTasks
                 }),
                 catchError(this.errorHandler.bind(this))

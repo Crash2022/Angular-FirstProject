@@ -12,4 +12,5 @@
     *ngFor="let task of tasks$ | async"
     [task]="task"
     (deleteTaskEvent)="deleteTask($event)"
+    (updateTaskEvent)="updateTask($event)"
 ></todolist-task>

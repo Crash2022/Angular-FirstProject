@@ -1,6 +1,13 @@
 <div class="task_item">
     <div class="task_item_title">
-        <div><input type="checkbox" [(ngModel)]="task.status" /></div>
+        <div>
+            <input
+                type="checkbox"
+                [(ngModel)]="task.status"
+                (click)="updateTaskStatusHandler($event)"
+                [checked]="task.status === taskStatusEnum.Completed"
+            />
+        </div>
         <div class="task_item_title_name">{{ task.title }}</div>
     </div>
     <button (click)="deleteTaskHandler()">-</button>
