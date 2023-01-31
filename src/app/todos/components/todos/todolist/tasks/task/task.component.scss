@@ -14,6 +14,14 @@
         }
     }
 
+    .todolist_inputField {
+        input {
+            border: 1px solid green;
+            padding: 5px 5px 5px 10px;
+            width: 190px;
+        }
+    }
+
     button {
         display: flex;
         justify-content: center;

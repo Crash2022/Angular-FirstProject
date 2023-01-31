@@ -8,7 +8,15 @@
                 [checked]="task.status === taskStatusEnum.Completed"
             />
         </div>
-        <div class="task_item_title_name">{{ task.title }}</div>
+
+        <div *ngIf="isTaskTitleEditMode; else NotEditMode" class="todolist_inputField">
+            <input type="text" (blur)="updateTaskTitleHandler()" [(ngModel)]="newTaskTitle" />
+        </div>
+        <ng-template #NotEditMode>
+            <div class="task_item_title_name" (dblclick)="activateTaskTitleEditModeHandler()">
+                {{ task.title }}
+            </div>
+        </ng-template>
     </div>
     <button (click)="deleteTaskHandler()">-</button>
 </div>

@@ -17,6 +17,9 @@ export class TaskComponent {
 
     taskStatusEnum = TaskStatusEnum
 
+    isTaskTitleEditMode = false
+    newTaskTitle = ''
+
     deleteTaskHandler() {
         this.deleteTaskEvent.emit({ todolistId: this.task.todoListId, taskId: this.task.id })
     }
@@ -31,6 +34,31 @@ export class TaskComponent {
             startDate: this.task.startDate,
             deadline: this.task.deadline,
         }
+        this.updateTaskEvent.emit({
+            todolistId: this.task.todoListId,
+            taskId: this.task.id,
+            model: model,
+        })
+    }
+
+    activateTaskTitleEditModeHandler() {
+        this.newTaskTitle = this.task.title
+        this.isTaskTitleEditMode = true
+    }
+
+    updateTaskTitleHandler() {
+        this.isTaskTitleEditMode = false
+        const newTitle = this.newTaskTitle
+
+        const model: UpdateTaskModelType = {
+            status: this.task.status,
+            title: newTitle,
+            priority: this.task.priority,
+            description: this.task.description,
+            startDate: this.task.startDate,
+            deadline: this.task.deadline,
+        }
+
         this.updateTaskEvent.emit({
             todolistId: this.task.todoListId,
             taskId: this.task.id,
