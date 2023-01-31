@@ -12,6 +12,10 @@
             margin-bottom: 5px;
             word-break: break-word;
         }
+        .task_item_title_name_completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
     }
 
     .todolist_inputField {

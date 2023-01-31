@@ -13,7 +13,13 @@
             <input type="text" (blur)="updateTaskTitleHandler()" [(ngModel)]="newTaskTitle" />
         </div>
         <ng-template #NotEditMode>
-            <div class="task_item_title_name" (dblclick)="activateTaskTitleEditModeHandler()">
+            <div
+                [ngClass]="{
+                    task_item_title_name: true,
+                    task_item_title_name_completed: task.status === taskStatusEnum.Completed
+                }"
+                (dblclick)="activateTaskTitleEditModeHandler()"
+            >
                 {{ task.title }}
             </div>
         </ng-template>
