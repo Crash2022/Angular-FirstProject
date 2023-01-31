@@ -24,16 +24,22 @@ export class TaskComponent {
         this.deleteTaskEvent.emit({ todolistId: this.task.todoListId, taskId: this.task.id })
     }
 
-    updateTaskStatusHandler(event: MouseEvent) {
-        const newStatus = (event.currentTarget as HTMLInputElement).checked
+    activateTaskTitleEditModeHandler() {
+        this.isTaskTitleEditMode = true
+        this.newTaskTitle = this.task.title
+    }
+
+    changeTask(patch: Partial<UpdateTaskModelType>) {
         const model: UpdateTaskModelType = {
-            status: newStatus ? TaskStatusEnum.Completed : TaskStatusEnum.New,
+            status: this.task.status,
             title: this.task.title,
             priority: this.task.priority,
             description: this.task.description,
             startDate: this.task.startDate,
             deadline: this.task.deadline,
+            ...patch,
         }
+
         this.updateTaskEvent.emit({
             todolistId: this.task.todoListId,
             taskId: this.task.id,
@@ -41,28 +47,45 @@ export class TaskComponent {
         })
     }
 
-    activateTaskTitleEditModeHandler() {
-        this.newTaskTitle = this.task.title
-        this.isTaskTitleEditMode = true
+    updateTaskStatusHandler(event: MouseEvent) {
+        const newStatus = (event.currentTarget as HTMLInputElement).checked
+
+        this.changeTask({ status: newStatus ? TaskStatusEnum.Completed : TaskStatusEnum.New })
+        // const model: UpdateTaskModelType = {
+        //     status: newStatus ? TaskStatusEnum.Completed : TaskStatusEnum.New,
+        //     title: this.task.title,
+        //     priority: this.task.priority,
+        //     description: this.task.description,
+        //     startDate: this.task.startDate,
+        //     deadline: this.task.deadline,
+        // }
+        // this.updateTaskEvent.emit({
+        //     todolistId: this.task.todoListId,
+        //     taskId: this.task.id,
+        //     model: model,
+        // })
     }
 
     updateTaskTitleHandler() {
+        // const newTitle = this.newTaskTitle
+
+        this.changeTask({ title: this.newTaskTitle })
+        // const model: UpdateTaskModelType = {
+        //     status: this.task.status,
+        //     title: newTitle,
+        //     priority: this.task.priority,
+        //     description: this.task.description,
+        //     startDate: this.task.startDate,
+        //     deadline: this.task.deadline,
+        // }
+        //
+        // this.updateTaskEvent.emit({
+        //     todolistId: this.task.todoListId,
+        //     taskId: this.task.id,
+        //     model: model,
+        // })
+
+        // this.newTaskTitle = '' // зачем занулять?
         this.isTaskTitleEditMode = false
-        const newTitle = this.newTaskTitle
-
-        const model: UpdateTaskModelType = {
-            status: this.task.status,
-            title: newTitle,
-            priority: this.task.priority,
-            description: this.task.description,
-            startDate: this.task.startDate,
-            deadline: this.task.deadline,
-        }
-
-        this.updateTaskEvent.emit({
-            todolistId: this.task.todoListId,
-            taskId: this.task.id,
-            model: model,
-        })
     }
 }
