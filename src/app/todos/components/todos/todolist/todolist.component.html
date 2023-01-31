@@ -10,6 +10,7 @@
         </ng-template>
         <button (click)="deleteTodoHandler()">X</button>
     </div>
-
+    <div class="todolist_addedDate">Added date: {{ todolist.addedDate | date }}</div>
+    <todolist-todolist-filter></todolist-todolist-filter>
     <todolist-tasks [todolistId]="todolist.id"></todolist-tasks>
 </div>

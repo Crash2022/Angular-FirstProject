@@ -1,0 +1,18 @@
+.filter_box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    div {
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid green;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: green;
+            color: white;
+        }
+    }
+}

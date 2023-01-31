@@ -8,7 +8,7 @@
         <span class="todolist_getTlError" *ngIf="error; else NotError">{{ error }}</span>
     </div>
     <ng-template #NotError>
-        <div class="todolists">
+        <div class="todolists_box">
             <todolist-todolist
                 *ngFor="let todo of todos$ | async"
                 [todolist]="todo"
