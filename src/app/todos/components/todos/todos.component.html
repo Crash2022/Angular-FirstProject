@@ -8,11 +8,13 @@
         <span class="todolist_getTlError" *ngIf="error; else NotError">{{ error }}</span>
     </div>
     <ng-template #NotError>
-        <todolist-todolist
-            *ngFor="let todo of todos$ | async"
-            [todolist]="todo"
-            (deleteTodoEvent)="deleteTodo($event)"
-            (updateTodoEvent)="updateTodoTitle($event)"
-        ></todolist-todolist>
+        <div class="todolists">
+            <todolist-todolist
+                *ngFor="let todo of todos$ | async"
+                [todolist]="todo"
+                (deleteTodoEvent)="deleteTodo($event)"
+                (updateTodoEvent)="updateTodoTitle($event)"
+            ></todolist-todolist>
+        </div>
     </ng-template>
 </div>

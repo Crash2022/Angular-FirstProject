@@ -33,4 +33,9 @@
         color: red;
         font-size: 20px;
     }
+    .todolists {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
