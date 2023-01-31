@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Observable } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { TaskAPIType } from '../../../../models/todos.model'
 import { TasksService } from '../../../../services/tasks.service'
 
@@ -15,18 +15,26 @@ export class TasksComponent implements OnInit {
     // делаем подписку на поток, чтобы была перерисовка при изменении
     tasks$!: Observable<TaskAPIType[]>
 
+    // значение для инпута таски
+    taskTitle = ''
+
     // в конструкторе делается импорт нужных сервисов
     constructor(private tasksService: TasksService) {}
 
     // инициализация компоненты
     ngOnInit(): void {
-        // this.tasks$ = this.tasksService.tasks$
-        // this.getTasks(this.todolistId)
-
-        this.tasks$ = this.tasksService.getTasks(this.todolistId)
+        // подписка на изменение стейта
+        this.tasks$ = this.tasksService.tasks$.pipe(
+            map(tasks => {
+                // таски для конкретного тудулиста
+                return tasks[this.todolistId]
+            })
+        )
+        this.tasksService.getTasks(this.todolistId)
     }
 
-    /*getTasks(todolistId: string) {
-        this.tasksService.getTasks(todolistId)
-    }*/
+    addTaskHandler() {
+        this.tasksService.addTask({ todolistId: this.todolistId, title: this.taskTitle })
+        this.taskTitle = ''
+    }
 }

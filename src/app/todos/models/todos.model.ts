@@ -32,3 +32,7 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4,
 }
+
+export interface DomainTask {
+    [key: string]: TaskAPIType[]
+}
