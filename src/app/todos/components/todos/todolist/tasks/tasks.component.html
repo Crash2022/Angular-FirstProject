@@ -1,8 +1,11 @@
-<input
-    type="text"
-    placeholder="Enter task title"
-    class="taskInput"
-    [(ngModel)]="taskTitle"
-    (keyup.enter)="addTaskHandler()"
-/>
+<div class="inputField">
+    <input
+        type="text"
+        placeholder="Enter task title"
+        class="taskInput"
+        [(ngModel)]="taskTitle"
+        (keyup.enter)="addTaskHandler()"
+    />
+</div>
+
 <todolist-task *ngFor="let task of tasks$ | async" [task]="task"></todolist-task>

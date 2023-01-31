@@ -1,6 +1,12 @@
-.taskInput {
-    border: 1px solid green;
-    margin-bottom: 10px;
-    padding: 5px 5px 5px 10px;
-    width: 250px;
+.inputField {
+    display: flex;
+    justify-content: center;
+
+    .taskInput {
+        border: 1px solid green;
+        margin-bottom: 10px;
+        padding: 5px 5px 5px 10px;
+        width: 250px;
+    }
 }
+
