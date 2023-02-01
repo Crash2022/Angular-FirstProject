@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { ErrorNotification } from '../models/notify.model'
 
+// пустой Injectable, чтобы каждый раз создавался новый инстанс класса
 @Injectable()
 export class NotificationService {
     private notify$ = new BehaviorSubject<ErrorNotification | null>(null)
