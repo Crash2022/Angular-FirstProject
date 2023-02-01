@@ -34,7 +34,6 @@
     </div>
     <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="error">
         <div *ngIf="password!.errors?.['required']">Password is required</div>
-        <div *ngIf="password!.errors?.['pattern']">Field must contain only letters</div>
         <div *ngIf="password!.errors?.['minLength']">Field must contain minimum 8 symbols</div>
     </div>
 

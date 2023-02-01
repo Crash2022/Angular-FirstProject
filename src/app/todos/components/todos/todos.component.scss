@@ -3,9 +3,37 @@
     flex-direction: column;
     align-items: center;
 
-    .todolist_title {
-        margin: 20px 0;
+    .header_navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .todolist_title {
+            margin: 20px 0;
+        }
+
+        .logoutBox {
+            margin-left: 30px;
+
+            button {
+                font-size: 18px;
+                margin: 10px;
+                padding: 10px;
+                border: 2px solid green;
+                //border-radius: 5px;
+                cursor: pointer;
+                background-color: green;
+                color: white;
+                width: 100px;
+
+                &:hover {
+                    background-color: white;
+                    color: black;
+                }
+            }
+        }
     }
+
     .todolist_addForm {
         margin-bottom: 20px;
 

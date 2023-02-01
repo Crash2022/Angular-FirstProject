@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { TodosService } from '../../services/todos.service'
 import { Observable } from 'rxjs'
 import { DomainTodolist } from '../../models/todos.model'
+import { AuthService } from '../../../core/services/auth.service'
 
 @Component({
     selector: 'todolist-todos',
@@ -19,7 +20,7 @@ export class TodosComponent implements OnInit {
     todoTitle = ''
 
     // в конструкторе делается импорт нужных сервисов
-    constructor(private todosService: TodosService) {}
+    constructor(private todosService: TodosService, private authService: AuthService) {}
 
     // инициализация компоненты
     ngOnInit(): void {
@@ -42,5 +43,9 @@ export class TodosComponent implements OnInit {
     }
     updateTodoTitle(data: { todolistId: string; newTitle: string }) {
         this.todosService.updateTodoTitle({ todolistId: data.todolistId, newTitle: data.newTitle })
+    }
+
+    logout() {
+        this.authService.logout()
     }
 }

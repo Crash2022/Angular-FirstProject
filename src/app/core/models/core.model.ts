@@ -23,10 +23,17 @@ export interface MeResponse {
 export enum ResultCodes {
     success = 0,
     error = 1,
+    captcha = 10,
 }
 
 export interface TasksResponseType {
     items: TaskAPIType[]
     totalCount: number
     error: string | null
+}
+
+export interface LoginRequestData {
+    email: string
+    password: string
+    rememberMe: boolean
 }

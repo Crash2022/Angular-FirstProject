@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { AuthService } from '../../../core/services/auth.service'
 
 @Component({
     selector: 'todolist-login',
@@ -9,19 +10,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent {
     loginForm = new FormGroup({
-        email: new FormControl('', [
-            Validators.required,
-            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,5}$'),
-        ]),
-        password: new FormControl('', [
-            Validators.required,
-            Validators.pattern('[a-zA-Z ]*'),
-            Validators.minLength(8),
-        ]),
-        rememberMe: new FormControl(false),
+        email: new FormControl<string>('', {
+            nonNullable: true,
+            validators: [
+                Validators.required,
+                Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,5}$'),
+            ],
+        }),
+        password: new FormControl<string>('', {
+            nonNullable: true,
+            validators: [Validators.required, Validators.minLength(8)],
+        }),
+        rememberMe: new FormControl<boolean>(false, { nonNullable: true }),
     })
 
-    constructor() {
+    constructor(private authService: AuthService) {
         // code
     }
 
@@ -31,8 +34,8 @@ export class LoginComponent {
 
     onSubmit() {
         // TODO: Use EventEmitter with form value
-        const value = this.loginForm.value
-        console.warn(value)
+        const values = this.loginForm.value
+        this.authService.login(values)
     }
 
     get email() {
