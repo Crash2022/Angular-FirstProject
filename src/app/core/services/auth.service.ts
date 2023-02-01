@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environments'
-import { LoginRequestData, MeResponse, ResultCodes } from '../models/core.model'
+import { BaseTodoResponse, LoginRequestData, MeResponse, ResultCodes } from '../models/core.model'
 import { Router } from '@angular/router'
 
 @Injectable()
@@ -12,7 +12,10 @@ export class AuthService {
 
     login(data: Partial<LoginRequestData>) {
         return this.http
-            .post<MeResponse>(`${environment.baseNetworkUrl}/auth/login`, data)
+            .post<BaseTodoResponse<{ userId: number }>>(
+                `${environment.baseNetworkUrl}/auth/login`,
+                data
+            )
             .subscribe(res => {
                 if (res.resultCode === ResultCodes.success) {
                     // this.isAuth = true
@@ -22,7 +25,7 @@ export class AuthService {
     }
     logout() {
         return this.http
-            .delete<MeResponse>(`${environment.baseNetworkUrl}/auth/login`)
+            .delete<BaseTodoResponse>(`${environment.baseNetworkUrl}/auth/login`)
             .subscribe(res => {
                 if (res.resultCode === ResultCodes.success) {
                     this.router.navigate(['/login'])
@@ -33,6 +36,9 @@ export class AuthService {
         return this.http.get<MeResponse>(`${environment.baseNetworkUrl}/auth/me`).subscribe(res => {
             if (res.resultCode === ResultCodes.success) {
                 this.isAuth = true
+                this.router.navigate(['/'])
+            } else {
+                this.router.navigate(['/login'])
             }
         })
     }
