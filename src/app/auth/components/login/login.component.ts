@@ -31,7 +31,8 @@ export class LoginComponent {
 
     onSubmit() {
         // TODO: Use EventEmitter with form value
-        console.warn(this.loginForm.value)
+        const value = this.loginForm.value
+        console.warn(value)
     }
 
     get email() {

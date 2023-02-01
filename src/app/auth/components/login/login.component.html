@@ -1,6 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login_box">
+    <!--email-->
     <div class="emailBox">
-        <label for="email">E-mail: </label>
+        <label for="email">E-mail:</label>
         <input
             id="email"
             type="text"
@@ -17,8 +18,9 @@
         <div *ngIf="email!.errors?.['pattern']">Not valid e-mail</div>
     </div>
 
+    <!--password-->
     <div class="passwordBox">
-        <label for="password">Password: </label>
+        <label for="password">Password:</label>
         <input
             id="password"
             type="password"
@@ -33,12 +35,17 @@
     <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="error">
         <div *ngIf="password!.errors?.['required']">Password is required</div>
         <div *ngIf="password!.errors?.['pattern']">Field must contain only letters</div>
+        <div *ngIf="password!.errors?.['minLength']">Field must contain minimum 8 symbols</div>
     </div>
-    <div class="rememberMeBox">
-        <div>
-            <input type="checkbox" />
-        </div>
-        <div>Remember Me</div>
+
+    <!--remember me-->
+    <div>
+        <label class="rememberMeBox">
+            <div>
+                <input id="rememberMe" type="checkbox" formControlName="rememberMe" />
+            </div>
+            <div>Remember Me</div>
+        </label>
     </div>
     <div class="submitBox">
         <button type="submit" [disabled]="loginForm.invalid">Login</button>
