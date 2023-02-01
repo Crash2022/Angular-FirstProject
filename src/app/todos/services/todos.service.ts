@@ -35,7 +35,7 @@ export class TodosService {
                     }))
                     return newTodolists
                 }),
-                catchError(this.errorHandler.bind(this))
+                catchError(this.consoleErrorHandler.bind(this))
             )
             .subscribe((todos: DomainTodolist[]) => {
                 this.todos$.next(todos)
@@ -52,7 +52,7 @@ export class TodosService {
                     const newTodo: DomainTodolist = { ...res.data.item, filter: 'all' }
                     return [newTodo, ...stateTodos]
                 }),
-                catchError(this.errorHandler.bind(this))
+                catchError(this.consoleErrorHandler.bind(this))
             )
             .subscribe((todos: DomainTodolist[]) => {
                 this.todos$.next(todos)
@@ -65,7 +65,7 @@ export class TodosService {
                 map(() => {
                     return this.todos$.getValue().filter(tl => tl.id !== todolistId)
                 }),
-                catchError(this.errorHandler.bind(this))
+                catchError(this.consoleErrorHandler.bind(this))
             )
             .subscribe(todo => {
                 this.todos$.next(todo)
@@ -84,7 +84,7 @@ export class TodosService {
                             tl.id === data.todolistId ? { ...tl, title: data.newTitle } : tl
                         )
                 }),
-                catchError(this.errorHandler.bind(this))
+                catchError(this.consoleErrorHandler.bind(this))
             )
             .subscribe(todo => {
                 this.todos$.next(todo)
@@ -99,9 +99,10 @@ export class TodosService {
         this.todos$.next(filteredTodolists)
     }
 
-    // общий обработчик ошибок
-    private errorHandler(error: HttpErrorResponse) {
+    // обработчик ошибок для консоли
+    private consoleErrorHandler(error: HttpErrorResponse) {
         this.beautyLoggerService.logger(error.message, 'error')
+        // возврат стрима
         return EMPTY
     }
 }
