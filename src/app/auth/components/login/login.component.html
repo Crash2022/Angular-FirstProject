@@ -1,6 +1,5 @@
-<p>login works!</p>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login_box">
+    <div class="emailBox">
         <label for="email">E-mail: </label>
         <input
             id="email"
@@ -15,18 +14,33 @@
     </div>
     <div *ngIf="email!.invalid && (email!.dirty || email!.touched)" class="error">
         <div *ngIf="email!.errors?.['required']">E-mail is required</div>
-        <!--        <div *ngIf="email!.errors?.['email']">Please enter correct e-mail</div>-->
         <div *ngIf="email!.errors?.['pattern']">Not valid e-mail</div>
     </div>
 
-    <div>
+    <div class="passwordBox">
         <label for="password">Password: </label>
-        <input id="password" type="password" formControlName="password" required />
+        <input
+            id="password"
+            type="password"
+            formControlName="password"
+            required
+            [ngClass]="{
+                defaultInput: true,
+                errorInput: password!.invalid && (password!.dirty || password!.touched)
+            }"
+        />
     </div>
     <div *ngIf="password!.invalid && (password!.dirty || password!.touched)" class="error">
         <div *ngIf="password!.errors?.['required']">Password is required</div>
         <div *ngIf="password!.errors?.['pattern']">Field must contain only letters</div>
     </div>
-
-    <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+    <div class="rememberMeBox">
+        <div>
+            <input type="checkbox" />
+        </div>
+        <div>Remember Me</div>
+    </div>
+    <div class="submitBox">
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </div>
 </form>

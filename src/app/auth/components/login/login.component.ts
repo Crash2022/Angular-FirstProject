@@ -11,12 +11,14 @@ export class LoginComponent {
     loginForm = new FormGroup({
         email: new FormControl('', [
             Validators.required,
-            // Validators.email,
             Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,5}$'),
-            // Validators.pattern(/gmail.com/),
         ]),
-
-        password: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[a-zA-Z ]*'),
+            Validators.minLength(8),
+        ]),
+        rememberMe: new FormControl(false),
     })
 
     constructor() {
