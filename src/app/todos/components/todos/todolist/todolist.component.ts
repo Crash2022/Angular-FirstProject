@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { Todolist } from '../../../models/todos.model'
+import { DomainTodolist, FilterType } from '../../../models/todos.model'
+import { TodosService } from '../../../services/todos.service'
 
 @Component({
     selector: 'todolist-todolist',
@@ -7,7 +8,7 @@ import { Todolist } from '../../../models/todos.model'
     styleUrls: ['./todolist.component.scss'],
 })
 export class TodolistComponent {
-    @Input() todolist!: Todolist
+    @Input() todolist!: DomainTodolist
     // передаём колбэк в родительскую компоненту
     @Output() deleteTodoEvent = new EventEmitter<string>()
     @Output() updateTodoEvent = new EventEmitter<{ todolistId: string; newTitle: string }>()
@@ -15,8 +16,7 @@ export class TodolistComponent {
     isTitleEditMode = false
     newTitle = ''
 
-    // можно было бы реализовать удаление здесь
-    // constructor(private todosService: TodosService) {}
+    constructor(private todosService: TodosService) {}
 
     deleteTodoHandler() {
         // this.todosService.deleteTodo
@@ -33,5 +33,9 @@ export class TodolistComponent {
         // this.isTitleEditMode = !this.isTitleEditMode
         this.isTitleEditMode = false
         this.updateTodoEvent.emit({ todolistId: this.todolist.id, newTitle: this.newTitle })
+    }
+
+    changeFilter(filter: FilterType) {
+        this.todosService.changeTodolistFilter({ todolistId: this.todolist.id, filter })
     }
 }

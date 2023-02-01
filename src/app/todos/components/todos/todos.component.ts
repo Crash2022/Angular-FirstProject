@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { TodosService } from '../../services/todos.service'
 import { Observable } from 'rxjs'
-import { Todolist } from '../../models/todos.model'
+import { DomainTodolist } from '../../models/todos.model'
 
 @Component({
     selector: 'todolist-todos',
@@ -10,7 +10,7 @@ import { Todolist } from '../../models/todos.model'
 })
 export class TodosComponent implements OnInit {
     // делаем подписку на поток, чтобы была перерисовка при изменении
-    todos$!: Observable<Todolist[]>
+    todos$!: Observable<DomainTodolist[]>
     // значение для ошибки
     // error = 'Network error. Please try again later.'
     error = ''

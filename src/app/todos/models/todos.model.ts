@@ -46,3 +46,9 @@ export interface UpdateTaskModelType {
     startDate: string
     deadline: string
 }
+
+export interface DomainTodolist extends Todolist {
+    filter: FilterType
+}
+
+export type FilterType = 'all' | 'active' | 'completed'

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { BehaviorSubject, catchError, EMPTY, map } from 'rxjs'
+import { BehaviorSubject, catchError, EMPTY, filter, map } from 'rxjs'
 import { environment } from '../../../environments/environments'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
-import { Todolist } from '../models/todos.model'
+import { DomainTodolist, FilterType, Todolist } from '../models/todos.model'
 import { BaseTodoResponse } from '../../core/models/core.model'
 
 @Injectable({
@@ -19,7 +19,7 @@ export class TodosService {
     }*/
 
     // создаем начальное значение (initialState)
-    todos$: BehaviorSubject<Todolist[]> = new BehaviorSubject<Todolist[]>([])
+    todos$: BehaviorSubject<DomainTodolist[]> = new BehaviorSubject<DomainTodolist[]>([])
 
     // http - для вазимодействия с сервером
     constructor(private http: HttpClient, private beautyLoggerService: BeautyLoggerService) {}
@@ -27,8 +27,17 @@ export class TodosService {
     getTodos() {
         this.http
             .get<Todolist[]>(`${environment.baseUrl}/todo-lists`)
-            .pipe(catchError(this.errorHandler.bind(this)))
-            .subscribe(todos => {
+            .pipe(
+                map(todos => {
+                    const newTodolists: DomainTodolist[] = todos.map(tl => ({
+                        ...tl,
+                        filter: 'all',
+                    }))
+                    return newTodolists
+                }),
+                catchError(this.errorHandler.bind(this))
+            )
+            .subscribe((todos: DomainTodolist[]) => {
                 this.todos$.next(todos)
             })
     }
@@ -38,14 +47,14 @@ export class TodosService {
                 title,
             })
             .pipe(
-                catchError(this.errorHandler.bind(this)),
                 map(res => {
                     const stateTodos = this.todos$.getValue()
-                    const newTodo = res.data.item
+                    const newTodo: DomainTodolist = { ...res.data.item, filter: 'all' }
                     return [newTodo, ...stateTodos]
-                })
+                }),
+                catchError(this.errorHandler.bind(this))
             )
-            .subscribe(todos => {
+            .subscribe((todos: DomainTodolist[]) => {
                 this.todos$.next(todos)
             })
     }
@@ -53,10 +62,10 @@ export class TodosService {
         this.http
             .delete<BaseTodoResponse>(`${environment.baseUrl}/todo-lists/${todolistId}`)
             .pipe(
-                catchError(this.errorHandler.bind(this)),
                 map(() => {
                     return this.todos$.getValue().filter(tl => tl.id !== todolistId)
-                })
+                }),
+                catchError(this.errorHandler.bind(this))
             )
             .subscribe(todo => {
                 this.todos$.next(todo)
@@ -68,18 +77,26 @@ export class TodosService {
                 title: data.newTitle,
             })
             .pipe(
-                catchError(this.errorHandler.bind(this)),
                 map(() => {
                     return this.todos$
                         .getValue()
                         .map(tl =>
                             tl.id === data.todolistId ? { ...tl, title: data.newTitle } : tl
                         )
-                })
+                }),
+                catchError(this.errorHandler.bind(this))
             )
             .subscribe(todo => {
                 this.todos$.next(todo)
             })
+    }
+
+    changeTodolistFilter(data: { todolistId: string; filter: FilterType }) {
+        const stateTodolists = this.todos$.getValue()
+        const filteredTodolists = stateTodolists.map(tl =>
+            tl.id === data.todolistId ? { ...tl, filter: data.filter } : tl
+        )
+        this.todos$.next(filteredTodolists)
     }
 
     // общий обработчик ошибок

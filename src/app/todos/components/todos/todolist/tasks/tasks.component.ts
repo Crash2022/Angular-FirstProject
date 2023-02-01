@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { map, Observable } from 'rxjs'
-import { TaskAPIType, UpdateTaskModelType } from '../../../../models/todos.model'
+import { combineLatest, map, Observable } from 'rxjs'
+import { TaskAPIType, TaskStatusEnum, UpdateTaskModelType } from '../../../../models/todos.model'
 import { TasksService } from '../../../../services/tasks.service'
+import { TodosService } from '../../../../services/todos.service'
 
 @Component({
     selector: 'todolist-tasks',
@@ -19,17 +20,38 @@ export class TasksComponent implements OnInit {
     taskTitle = ''
 
     // в конструкторе делается импорт нужных сервисов
-    constructor(private tasksService: TasksService) {}
+    constructor(private tasksService: TasksService, private todosService: TodosService) {}
 
     // инициализация компоненты
     ngOnInit(): void {
-        // подписка на изменение стейта
-        this.tasks$ = this.tasksService.tasks$.pipe(
-            map(tasks => {
-                // таски для конкретного тудулиста
-                return tasks[this.todolistId]
+        // подписка на изменение стейта // вариант до фильтрации ТЛ
+        // this.tasks$ = this.tasksService.tasks$.pipe(
+        //     map(tasks => {
+        //         // таски для конкретного тудулиста
+        //         return tasks[this.todolistId]
+        //     })
+        // )
+
+        // подписка на два потока одновременно
+        this.tasks$ = combineLatest([this.todosService.todos$, this.tasksService.tasks$]).pipe(
+            map(res => {
+                const tasks = res[1]
+                let tasksForTodo = tasks[this.todolistId]
+                const todos = res[0]
+                const activeTodo = todos.find(tl => tl.id === this.todolistId)
+
+                if (activeTodo?.filter === 'completed') {
+                    tasksForTodo = tasksForTodo.filter(
+                        task => task.status === TaskStatusEnum.Completed
+                    )
+                }
+                if (activeTodo?.filter === 'active') {
+                    tasksForTodo = tasksForTodo.filter(task => task.status === TaskStatusEnum.New)
+                }
+                return tasksForTodo
             })
         )
+
         this.tasksService.getTasks(this.todolistId)
     }
 
