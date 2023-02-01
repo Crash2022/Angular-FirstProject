@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { NotificationService } from '../../../core/services/notification.service'
 import { Observable } from 'rxjs'
+import { ErrorNotification } from '../../../core/models/notify.model'
 
 @Component({
     selector: 'todolist-notify',
@@ -8,12 +9,18 @@ import { Observable } from 'rxjs'
     styleUrls: ['./notify.component.scss'],
 })
 export class NotifyComponent implements OnInit {
-    notification$?: Observable<Notification | null>
+    notify$: Observable<ErrorNotification | null>
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(private notificationService: NotificationService) {
+        this.notify$ = this.notificationService.notify$$
+    }
 
     ngOnInit() {
         // subscribe
-        this.notification$ = this.notificationService.notification$
+        // this.notify$ = this.notificationService.notify$$
+    }
+
+    closeNotification() {
+        this.notificationService.clearNotification()
     }
 }

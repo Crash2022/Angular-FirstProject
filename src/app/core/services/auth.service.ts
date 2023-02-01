@@ -37,6 +37,8 @@ export class AuthService {
                 if (res.resultCode === ResultCodes.success) {
                     // this.isAuth = true
                     this.router.navigate(['/'])
+                } else {
+                    this.notificationService.handleError(res.messages[0])
                 }
             })
     }
@@ -57,6 +59,8 @@ export class AuthService {
             .subscribe(res => {
                 if (res.resultCode === ResultCodes.success) {
                     this.isAuth = true
+                } else {
+                    this.notificationService.handleError(res.messages[0])
                 }
                 this.resolveAuthRequest()
             })

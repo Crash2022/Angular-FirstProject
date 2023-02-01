@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { BehaviorSubject, catchError, EMPTY, filter, map } from 'rxjs'
+import { BehaviorSubject, catchError, EMPTY, map } from 'rxjs'
 import { environment } from '../../../environments/environments'
 import { BeautyLoggerService } from '../../core/services/beauty-logger.service'
 import { DomainTodolist, FilterType, Todolist } from '../models/todos.model'
