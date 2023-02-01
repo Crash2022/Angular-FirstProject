@@ -8,6 +8,14 @@ import { Router } from '@angular/router'
 export class AuthService {
     isAuth = false
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    resolveAuthRequest: Function = () => {
+        // code
+    }
+    authRequest = new Promise(resolve => {
+        this.resolveAuthRequest = resolve
+    })
+
     constructor(private http: HttpClient, private router: Router) {}
 
     login(data: Partial<LoginRequestData>) {
@@ -36,10 +44,8 @@ export class AuthService {
         return this.http.get<MeResponse>(`${environment.baseNetworkUrl}/auth/me`).subscribe(res => {
             if (res.resultCode === ResultCodes.success) {
                 this.isAuth = true
-                this.router.navigate(['/'])
-            } else {
-                this.router.navigate(['/login'])
             }
+            this.resolveAuthRequest()
         })
     }
 }

@@ -14,10 +14,16 @@
 
     .emailBox {
         margin-top: 40px;
+
+        input {
+            padding-left: 5px;
+        }
     }
 
     .passwordBox {
-
+        input {
+            padding-left: 5px;
+        }
     }
 
     .rememberMeBox {
