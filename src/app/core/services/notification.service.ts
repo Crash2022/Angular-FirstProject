@@ -5,6 +5,8 @@ import { ErrorNotification } from '../models/notify.model'
 // пустой Injectable, чтобы каждый раз создавался новый инстанс класса
 @Injectable()
 export class NotificationService {
+    // notify$ = new BehaviorSubject<ErrorNotification | null>(null)
+    // другой метод
     private notify$ = new BehaviorSubject<ErrorNotification | null>(null)
     notify$$: Observable<ErrorNotification | null> = this.notify$.asObservable()
 

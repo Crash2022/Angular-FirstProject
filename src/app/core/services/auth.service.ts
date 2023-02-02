@@ -36,7 +36,7 @@ export class AuthService {
             .subscribe(res => {
                 if (res.resultCode === ResultCodes.success) {
                     // this.isAuth = true
-                    this.router.navigate(['/'])
+                    this.router.navigate(['todos'])
                 } else {
                     this.notificationService.handleError(res.messages[0])
                 }
@@ -48,7 +48,7 @@ export class AuthService {
             .pipe(catchError(this.errorHandler.bind(this)))
             .subscribe(res => {
                 if (res.resultCode === ResultCodes.success) {
-                    this.router.navigate(['/login'])
+                    this.router.navigate(['login'])
                 }
             })
     }

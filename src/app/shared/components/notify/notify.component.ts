@@ -9,15 +9,18 @@ import { ErrorNotification } from '../../../core/models/notify.model'
     styleUrls: ['./notify.component.scss'],
 })
 export class NotifyComponent implements OnInit {
-    notify$: Observable<ErrorNotification | null>
+    notify$?: Observable<ErrorNotification | null>
 
     constructor(private notificationService: NotificationService) {
+        // другой метод
         this.notify$ = this.notificationService.notify$$
     }
 
     ngOnInit() {
         // subscribe
-        // this.notify$ = this.notificationService.notify$$
+        // this.notify$ = this.notificationService.notify$
+        // другой метод
+        this.notify$ = this.notificationService.notify$$
     }
 
     closeNotification() {

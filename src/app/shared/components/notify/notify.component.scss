@@ -1,6 +1,6 @@
 .notifyBox {
     position: fixed;
-    top: 125px;
+    top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
@@ -14,7 +14,7 @@
         line-height: 14px;
 
         width: 420px;
-        margin-top: 1500px;
+        //margin-top: -50px;
         padding: 11px 13px;
 
         color: #FFFFFF;
