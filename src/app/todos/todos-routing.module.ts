@@ -4,14 +4,14 @@ import { TodosComponent } from './components/todos/todos.component'
 import { AuthGuard } from '../guards/auth.guard'
 
 // without LazyLoading
-const routes: Routes = [
-    { path: 'todos', component: TodosComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-]
+// const routes: Routes = [
+//     { path: 'todos', component: TodosComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+// ]
 
 // LazyLoading
-// const routes: Routes = [
-//     { path: '', component: TodosComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-// ]
+const routes: Routes = [
+    { path: '', component: TodosComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+]
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

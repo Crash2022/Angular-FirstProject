@@ -18,8 +18,8 @@ import { CoreModule } from './core/core.module'
         SharedModule,
         CoreModule,
         // необходимо убрать для LazyLoading
-        AuthModule,
-        TodosModule,
+        // AuthModule,
+        // TodosModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
