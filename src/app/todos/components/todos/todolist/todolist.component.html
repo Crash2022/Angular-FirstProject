@@ -8,7 +8,10 @@
                 {{ todolist.title }}
             </div>
         </ng-template>
-        <button (click)="deleteTodoHandler()">X</button>
+        <!--<button (click)="deleteTodoHandler()">X</button>-->
+        <div class="deleteBox" (click)="deleteTodoHandler()">
+            <img src="/assets/icons/delete-02.svg" alt="deleteTodolistImage" />
+        </div>
     </div>
     <div class="todolist_addedDate">Added date: {{ todolist.addedDate | date }}</div>
     <todolist-todolist-filter

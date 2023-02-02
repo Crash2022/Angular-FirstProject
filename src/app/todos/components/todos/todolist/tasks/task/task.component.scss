@@ -44,4 +44,14 @@
             cursor: pointer;
         }
     }
+
+    .deleteBox {
+        img {
+            width: 25px;
+            height: 25px;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
