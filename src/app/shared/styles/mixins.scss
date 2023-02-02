@@ -1,0 +1,53 @@
+@import './variables';
+
+@mixin flexDefault() {
+    display: flex;
+    align-items: center;
+}
+
+@mixin defaultBigButton() {
+    button {
+        font-size: 18px;
+        margin: 10px;
+        padding: 10px;
+        border: 2px solid green;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: green;
+        color: white;
+        width: 100px;
+
+        &:hover {
+            background-color: white;
+            color: black;
+        }
+    }
+}
+
+@mixin boxShadow() {
+    box-shadow: $shadowColor 3px 3px 10px;
+}
+
+@mixin defaultBorder() {
+    border: 2px solid green;
+}
+
+@mixin defaultInputPadding() {
+    padding: $paddingForInput;
+}
+
+@mixin defaultInput() {
+    border: 2px solid green;
+    padding: 5px 5px 5px 10px;
+    width: 250px;
+}
+
+@mixin defaultIcon($imageWidth, $imageHeight) {
+    img {
+        width: $imageWidth;
+        height: $imageHeight;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}

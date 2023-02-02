@@ -1,21 +1,21 @@
+@import 'src/app/shared/styles/mixins';
+@import 'src/app/shared/styles/variables';
+
 .todolist_item {
-    display: flex;
+    @include flexDefault();
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     border: 1px solid #b0b0b0;
     margin: 20px;
     padding: 15px 20px;
     color: black;
-    border-radius: 5px;
+    border-radius: $borderRadius;
     width: 300px;
-    box-shadow: #b0b0b0 3px 3px 10px;
+    @include boxShadow();
 
     .todolist_item_title {
-
-        display: flex;
+        @include flexDefault();
         justify-content: space-between;
-        align-items: center;
         margin-bottom: 20px;
         width: 300px;
         padding: 0 20px;
@@ -35,9 +35,8 @@
         }
 
         button {
-            display: flex;
+            @include flexDefault();
             justify-content: center;
-            align-items: center;
             margin-left: 5px;
             background-color: red;
             color: white;
@@ -49,13 +48,7 @@
         }
 
         .deleteBox {
-            img {
-                width: 30px;
-                height: 30px;
-            }
-            &:hover {
-                cursor: pointer;
-            }
+            @include defaultIcon(30px, 30px);
         }
     }
 

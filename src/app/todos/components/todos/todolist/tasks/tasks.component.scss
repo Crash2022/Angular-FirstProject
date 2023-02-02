@@ -1,12 +1,12 @@
+@import 'src/app/shared/styles/mixins';
+
 .inputField {
     display: flex;
     justify-content: center;
 
     .taskInput {
-        border: 1px solid green;
+        @include defaultInput();
         margin-bottom: 10px;
-        padding: 5px 5px 5px 10px;
-        width: 250px;
     }
 }
 

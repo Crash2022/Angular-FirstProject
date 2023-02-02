@@ -1,12 +1,12 @@
+@import 'src/app/shared/styles/mixins';
+
 .todolist_box {
-    display: flex;
+    @include flexDefault();
     flex-direction: column;
-    align-items: center;
 
     .header_navbar {
-        display: flex;
+        @include flexDefault();
         justify-content: center;
-        align-items: center;
 
         .todolist_title {
             margin: 20px 0;
@@ -15,22 +15,7 @@
         .logoutBox {
             margin-left: 30px;
 
-            button {
-                font-size: 18px;
-                margin: 10px;
-                padding: 10px;
-                border: 2px solid green;
-                //border-radius: 5px;
-                cursor: pointer;
-                background-color: green;
-                color: white;
-                width: 100px;
-
-                &:hover {
-                    background-color: white;
-                    color: black;
-                }
-            }
+            @include defaultBigButton();
         }
     }
 
@@ -38,14 +23,14 @@
         margin-bottom: 20px;
 
         input {
-            padding: 5px 5px 5px 10px;
             border: 2px solid green;
+            padding: 5px 5px 5px 10px;
             width: 250px;
             height: 30px;
         }
         button {
             font-size: 20px;
-            border-radius: 5px;
+            border-radius: $borderRadius;
             background-color: green;
             color: white;
             border: none;

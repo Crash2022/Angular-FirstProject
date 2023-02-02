@@ -1,11 +1,11 @@
+@import 'src/app/shared/styles/mixins';
+
 .task_item{
-    display: flex;
+    @include flexDefault();
     justify-content: space-between;
-    align-items: center;
 
     .task_item_title {
-        display: flex;
-        align-items: center;
+        @include flexDefault();
 
         .task_item_title_name {
             margin-left: 5px;
@@ -27,9 +27,8 @@
     }
 
     button {
-        display: flex;
+        @include flexDefault();
         justify-content: center;
-        align-items: center;
         margin-left: 15px;
         padding-bottom: 3px;
         background-color: red;
@@ -46,12 +45,6 @@
     }
 
     .deleteBox {
-        img {
-            width: 25px;
-            height: 25px;
-        }
-        &:hover {
-            cursor: pointer;
-        }
+        @include defaultIcon(25px, 25px);
     }
 }

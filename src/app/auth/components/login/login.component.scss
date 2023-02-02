@@ -1,12 +1,10 @@
+@import 'src/app/shared/styles/mixins';
+
 .login_box {
-    border: 2px solid green;
+    @include defaultBorder();
     width: 300px;
     margin: 100px auto 0 auto;
     padding: 20px;
-    //display: flex;
-    //flex-direction: column;
-    //justify-content: center;
-    //align-items: center;
 
     div {
         margin-bottom: 15px;
@@ -16,57 +14,38 @@
         margin-top: 40px;
 
         input {
-            padding-left: 5px;
+            @include defaultInputPadding();
         }
     }
 
     .passwordBox {
         input {
-            padding-left: 5px;
+            @include defaultInputPadding();
         }
     }
 
     .rememberMeBox {
-        display: flex;
-        align-items: center;
+        @include flexDefault();
     }
 
     .submitBox {
         display: flex;
         justify-content: center;
 
-        button {
-            font-size: 18px;
-            margin: 10px;
-            padding: 10px;
-            border: 2px solid green;
-            //border-radius: 5px;
-            cursor: pointer;
-            background-color: green;
-            color: white;
-            width: 100px;
-
-            &:hover {
-                background-color: white;
-                color: black;
-            }
-        }
+        @include defaultBigButton();
     }
 }
 
-
-.error {
-    color: red;
-}
-
 .defaultInput {
-    border: 2px solid green;
-    width: 100%;
-    height: 30px;
+    border: 1px solid green;
+    width: 95%;
 }
 .errorInput {
     border: 2px solid red;
     background-color: gray;
+}
+.error {
+    color: red;
 }
 
 // чтобы не навешивать стили, можно использовать по умолчанию
